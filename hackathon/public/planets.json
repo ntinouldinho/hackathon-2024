@@ -112,5 +112,36 @@
                 "texture": "Mimas.jpg"
             }
         ]
+    },
+    "Uranus": {
+        "radius": 60268,
+        "texture": "uranus.jpeg",
+        "moons": [
+            {
+                "name": "Miranda",
+                "radius": 236,
+                "texture": "Miranda.jpg"
+            },
+            {
+                "name": "Ariel",
+                "radius": 579,
+                "texture": "Ariel.jpg"
+            },
+            {
+                "name": "Umbriel",
+                "radius": 585,
+                "texture": "Umbriel.jpeg"
+            },
+            {
+                "name": "Titania",
+                "radius": 789,
+                "texture": "Titania.jpg"
+            },
+            {
+                "name": "Oberon",
+                "radius": 761,
+                "texture": "Oberon.jpeg"
+            }
+        ]
     }
 }
