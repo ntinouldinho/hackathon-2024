@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Planet from './Planet';
 
 const planets = [
-  { name: 'Moon', texture: 'https://threejs.org/examples/textures/planets/moon_1024.jpg'},
+  { name: 'Moon', texture: 'http://localhost:3000/textures/moon_1024.jpg'},
   { name: 'Mercury', texture: 'https://threejs.org/examples/textures/planets/mercury_1024.jpg' },
   { name: 'Venus', texture: 'https://threejs.org/examples/textures/planets/venus_surface_1024.jpg' },
   { name: 'Earth', texture: 'https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg' },
