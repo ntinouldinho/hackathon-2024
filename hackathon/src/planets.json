@@ -2,6 +2,7 @@
     "Neptune": {
         "radius": 24764,
         "texture": "neptune.jpeg",
+        "ring": "",
         "moons": [
             {
                 "name": "Triton",
@@ -28,6 +29,7 @@
     "Jupiter": {
         "radius": 69911,
         "texture": "jupiter.jpeg",
+        "ring": "verticalring.jpeg",
         "moons": [
             {
                 "name": "Io",
@@ -64,6 +66,7 @@
     "Earth": {
         "radius": 6371,
         "texture": "earth.jpeg",
+        "ring": "",
         "moons": [
             {
                 "name": "Moon",
@@ -117,6 +120,7 @@
     "Uranus": {
         "radius": 25362,
         "texture": "uranus.jpeg",
+        "ring": "",
         "moons": [
             {
                 "name": "Miranda",
@@ -148,6 +152,7 @@
     "Mars": {
         "radius": 3389,
         "texture": "mars.jpeg",
+        "ring": "",
         "moons": [
             {
                 "name": "Phobos",
@@ -164,16 +169,19 @@
     "Mercury": {
         "radius": 2439,
         "texture": "mercury.jpeg",
+        "ring": "",
         "moons": []
     },
     "Venus": {
         "radius": 6051,
         "texture": "venus.jpeg",
+        "ring": "",
         "moons": []
     },
     "Pluto": {
         "radius": 1151,
         "texture": "venus.jpeg",
+        "ring": "",
         "moons": []
     }
 }
