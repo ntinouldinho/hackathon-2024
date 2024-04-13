@@ -4,10 +4,11 @@ import { FontLoader } from "three/addons/loaders/FontLoader.js";
 import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-const Planet = ({ textureUrl }) => {
+const Planet = ({ planetName, textureUrl }) => {
   const mountRef = useRef(null);
 
   useEffect(() => {
+    console.log(planetName);
     // Scene Setup
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -105,6 +106,7 @@ const Planet = ({ textureUrl }) => {
     // camera.lookAt(moon.position);
 
     const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enablePan = true;
 
     // Animation loop
     const animate = function () {
