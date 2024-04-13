@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import planetsConfig from "./planets.json";
-import SolarSystem from "./SolarSystem";
+import SolarSystemPage2 from "./SolarSystemPage2";
 
 // const planets = [
 //   { name: "Moon", texture: "textures/moon_1024.jpg" },
@@ -46,7 +46,7 @@ const App = () => {
           {planet}
         </button>
       ))}
-      <SolarSystem planet={currentPlanet} />
+      <SolarSystemPage2 planet={currentPlanet} />
     </div>
   );
 };

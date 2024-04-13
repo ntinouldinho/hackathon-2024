@@ -5,7 +5,7 @@ import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import getSpherePlanet from "./SpherePlanet";
 
-const SolarSystem = ({ planet }) => {
+const SolarSystemPage2 = ({ planet }) => {
   console.log(planet);
   const mountRef = useRef(null);
 
@@ -123,4 +123,4 @@ const SolarSystem = ({ planet }) => {
   return <div ref={mountRef} style={{ width: "100%", height: "100vh" }} />;
 };
 
-export default SolarSystem;
+export default SolarSystemPage2;
