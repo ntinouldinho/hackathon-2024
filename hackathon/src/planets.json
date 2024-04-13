@@ -120,7 +120,7 @@
     "Uranus": {
         "radius": 25362,
         "texture": "uranus.jpeg",
-        "ring": "",
+        "ring": "uranusring.jpg",
         "moons": [
             {
                 "name": "Miranda",
