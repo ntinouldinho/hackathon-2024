@@ -1,44 +1,33 @@
-import React, { useRef, useState } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Box } from '@react-three/drei';
-import * as d3 from 'd3';
+import React, { useState } from 'react';
+import Planet from './Planet';
 
-const RotatingBox = () => {
-  const meshRef = useRef();
-  const [rotationSpeed, setRotationSpeed] = useState(0.01);
-
-  useFrame(() => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x += rotationSpeed;
-      meshRef.current.rotation.y += rotationSpeed;
-    }
-  });
-
-  const handleSpeedChange = (event) => {
-    const speed = parseFloat(event.target.value);
-    setRotationSpeed(speed);
-  };
-
-  return (
-    <mesh ref={meshRef}>
-      <Box args={[2, 2, 2]} /> {/* Box geometry with dimensions 2x2x2 */}
-      <meshStandardMaterial color={'orange'} /> {/* Color of the cube */}
-    </mesh>
-  );
-};
+const planets = [
+  { name: 'Moon', texture: 'https://threejs.org/examples/textures/planets/moon_1024.jpg'},
+  { name: 'Mercury', texture: 'https://threejs.org/examples/textures/planets/mercury_1024.jpg' },
+  { name: 'Venus', texture: 'https://threejs.org/examples/textures/planets/venus_surface_1024.jpg' },
+  { name: 'Earth', texture: 'https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg' },
+  { name: 'Mars', texture: 'https://threejs.org/examples/textures/planets/mars_1024.jpg' },
+  { name: 'Jupiter', texture: 'https://threejs.org/examples/textures/planets/jupiter_1024.jpg' },
+  { name: 'Saturn', texture: 'https://threejs.org/examples/textures/planets/saturn_1024.jpg' },
+  { name: 'Uranus', texture: 'https://threejs.org/examples/textures/planets/uranus_1024.jpg' },
+  { name: 'Neptune', texture: 'https://threejs.org/examples/textures/planets/neptune_1024.jpg' },
+  { name: 'Pluto', texture: 'https://threejs.org/examples/textures/planets/pluto_1024.jpg' }
+];
 
 const App = () => {
+  const [currentTexture, setCurrentTexture] = useState(planets[0].texture);
+
   return (
-    <div style={{ height: '100vh', width: '100%' }}>
-      <Canvas>
-        <ambientLight intensity={0.5} />
-        <spotLight position={[10, 10, 10]} angle={0.3} />
-        <OrbitControls />
-        <RotatingBox />
-      </Canvas>
+    <div>
+      <h1>Planetary Viewer</h1>
+      {planets.map(planet => (
+        <button key={planet.name} onClick={() => setCurrentTexture(planet.texture)}>
+          {planet.name}
+        </button>
+      ))}
+      <Planet textureUrl={currentTexture} />
     </div>
   );
 };
 
 export default App;
-
