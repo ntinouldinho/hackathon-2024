@@ -9,26 +9,66 @@
                 "texture": "Triton.jpeg"
             },
             {
-                "name": "Triton",
-                "radius": 1353,
-                "texture": "Triton.jpeg"
-            }
-        ]
-
-    },
-    "Earth": {
-        "radius": 24764,
-        "texture": "neptune.jpeg",
-        "moons": [
-            {
-                "name": "Triton",
-                "radius": 1353,
-                "texture": "Triton.jpeg"
+                "name": "Nereid",
+                "radius": 170,
+                "texture": "nereid.jpeg"
             },
             {
-                "name": "Triton",
-                "radius": 1353,
-                "texture": "Triton.jpeg"
+                "name": "Proteus",
+                "radius": 420,
+                "texture": "proteus.jpg"
+            },
+            {
+                "name": "Larissa",
+                "radius": 97,
+                "texture": "larissa.jpeg"
+            }
+        ]
+    },
+    "Jupiter": {
+        "radius": 69911,
+        "texture": "jupiter.jpeg",
+        "moons": [
+            {
+                "name": "Io",
+                "radius": 1821,
+                "texture": "io.jpg"
+            },
+            {
+                "name": "Europa",
+                "radius": 1561,
+                "texture": "europa.jpg"
+            },
+            {
+                "name": "Ganymede",
+                "radius": 2634,
+                "texture": "Ganymede.png"
+            },
+            {
+                "name": "Callisto",
+                "radius": 2410,
+                "texture": "Callisto.png"
+            },
+            {
+                "name": "Amalthea",
+                "radius": 72,
+                "texture": "Amalthea.jpeg"
+            },
+            {
+                "name": "Metis",
+                "radius": 28,
+                "texture": "Metis.jpeg"
+            }
+        ]
+    },
+    "Earth": {
+        "radius": 6371,
+        "texture": "earth.jpeg",
+        "moons": [
+            {
+                "name": "Moon",
+                "radius": 1737,
+                "texture": "moon_1024.jpg"
             }
         ]
     }
