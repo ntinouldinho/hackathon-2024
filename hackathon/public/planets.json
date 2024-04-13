@@ -71,5 +71,46 @@
                 "texture": "moon_1024.jpg"
             }
         ]
+    },
+    "Saturn": {
+        "radius": 60268,
+        "texture": "saturn.jpeg",
+        "moons": [
+            {
+                "name": "Titan",
+                "radius": 2575,
+                "texture": "Titan.jpeg"
+            },
+            {
+                "name": "Rhea",
+                "radius": 763,
+                "texture": "Rhea.jpeg"
+            },
+            {
+                "name": "Iapetus",
+                "radius": 734,
+                "texture": "Iapetus.png"
+            },
+            {
+                "name": "Dione",
+                "radius": 561,
+                "texture": "Dione.jpeg"
+            },
+            {
+                "name": "Tethys",
+                "radius": 531,
+                "texture": "Tethys.jpg"
+            },
+            {
+                "name": "Enceladus",
+                "radius": 252,
+                "texture": "Enceladus.jpg"
+            },
+            {
+                "name": "Mimas",
+                "radius": 198,
+                "texture": "Mimas.jpg"
+            }
+        ]
     }
 }
