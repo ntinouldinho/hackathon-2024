@@ -1,112 +1,126 @@
+import React, { useRef, useEffect } from "react";
 import * as THREE from "three";
-import { useEffect } from "react";
-import SceneInit from "./lib/SceneInit";
-import Planet from "./lib/Planet";
-import Rotation from "./lib/Rotation";
+import { FontLoader } from "three/addons/loaders/FontLoader.js";
+import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import getSpherePlanet from "./SpherePlanet";
 
-planets = [
-    {
-        "name": "Mercury",
-        
-    }
-]
-
-const SolarSystemPlanet = () => {
-
-}
-
-const SolarSystem = () => {
-    let gui;
-
-  const initGui = async () => {
-    const dat = await import("dat.gui");
-    gui = new dat.GUI();
-    return gui;  // Return the GUI object
-  };
+const SolarSystem = ({ planet }) => {
+  console.log(planet);
+  const mountRef = useRef(null);
 
   useEffect(() => {
-    async function fetchData(mercuryRotationMesh, venusRotationMesh, earthRotationMesh, marsRotationMesh) {
-      const gui = await initGui();
-      let solarSystemGui = gui.__folders["solar system"]; 
-  
-      if (!solarSystemGui) {
-        solarSystemGui = gui.addFolder("solar system");
-      }
-  
-      solarSystemGui.add(mercuryRotationMesh, "visible").name("mercury").listen();
-      solarSystemGui.add(venusRotationMesh, "visible").name("venus").listen();
-      solarSystemGui.add(earthRotationMesh, "visible").name("earth").listen();
-      solarSystemGui.add(marsRotationMesh, "visible").name("mars").listen();
+    // Scene Setup
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    mountRef.current.appendChild(renderer.domElement);
+
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff);
+    scene.add(ambientLight);
+    const pointLight = new THREE.PointLight(0xffffff, 1);
+    pointLight.position.set(5, 3, 5);
+    scene.add(pointLight);
+
+    // Add the Planet
+    const planetSphere = getSpherePlanet(3, planet.texture);
+    // const planetSphere = getSpherePlanet(planet.radius, planet.texture);
+
+    scene.add(planetSphere);
+
+    // Add the moons
+    const moonShperes = [];
+    planet.moons.forEach((moon) => {
+      console.log(moon);
+      const radi = (moon.radius / planet.radius) * 30;
+
+      console.log(moon.texture);
+      const moonSphere = getSpherePlanet(0.3, moon.texture);
+
+      scene.add(moonSphere);
+      moonSphere.position.set(4, 0, 0); // Position the moon next to the planet
+      //   //   moonSphere.position.set(THREE.MathUtils.randFloat(4, 9), 0, 0); // Position the moon next to the planet
+
+      moonShperes.push(moonSphere);
+    });
+
+    // Create a background with animated clouds and stars
+    const backgroundGeometry = new THREE.SphereGeometry(100, 32, 32);
+    const backgroundMaterial = new THREE.MeshBasicMaterial({
+      color: 0x000000,
+      side: THREE.BackSide,
+    });
+    const background = new THREE.Mesh(backgroundGeometry, backgroundMaterial);
+    scene.add(background);
+
+    const cloudGeometry = new THREE.SphereGeometry(110, 32, 32);
+    const cloudMaterial = new THREE.MeshBasicMaterial({
+      color: 0xffffff,
+      opacity: 0.2,
+      transparent: true,
+    });
+    const clouds = new THREE.Mesh(cloudGeometry, cloudMaterial);
+    scene.add(clouds);
+
+    const starGeometry = new THREE.SphereGeometry(0.05, 32, 32);
+    const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffcc });
+    const stars = [];
+
+    for (let i = 0; i < 1000; i++) {
+      const star = new THREE.Mesh(starGeometry, starMaterial);
+      const [x, y, z] = Array(3)
+        .fill()
+        .map(() => THREE.MathUtils.randFloatSpread(100));
+      star.position.set(x, y, z);
+      scene.add(star);
+      stars.push(star);
     }
 
-    let test = new SceneInit();
-    test.initScene();
-    test.animate();
+    camera.position.z = 10;
+    // camera.lookAt(moon.position);
 
-    const sunGeometry = new THREE.SphereGeometry(8);
-    const sunTexture = new THREE.TextureLoader().load("textures/mercury.jpeg");
-    const sunMaterial = new THREE.MeshBasicMaterial({ map: sunTexture });
-    const sunMesh = new THREE.Mesh(sunGeometry, sunMaterial);
-    const solarSystem = new THREE.Group();
-    solarSystem.add(sunMesh);
-    test.scene.add(solarSystem);
+    const controls = new OrbitControls(camera, renderer.domElement);
 
-    const mercury = new Planet(2, 16, "textures/mercury.jpeg");
-    const mercuryMesh = mercury.getMesh();
-    let mercurySystem = new THREE.Group();
-    mercurySystem.add(mercuryMesh);
-
-    const venus = new Planet(3, 32, "textures/mercury.jpeg");
-    const venusMesh = venus.getMesh();
-    let venusSystem = new THREE.Group();
-    venusSystem.add(venusMesh);
-
-    const earth = new Planet(4, 48, "textures/mercury.jpeg");
-    const earthMesh = earth.getMesh();
-    let earthSystem = new THREE.Group();
-    earthSystem.add(earthMesh);
-
-    const mars = new Planet(3, 64, "textures/mercury.jpeg");
-    const marsMesh = mars.getMesh();
-    let marsSystem = new THREE.Group();
-    marsSystem.add(marsMesh);
-
-    solarSystem.add(mercurySystem, venusSystem, earthSystem, marsSystem);
-
-    const mercuryRotation = new Rotation(mercuryMesh);
-    const mercuryRotationMesh = mercuryRotation.getMesh();
-    mercurySystem.add(mercuryRotationMesh);
-    const venusRotation = new Rotation(venusMesh);
-    const venusRotationMesh = venusRotation.getMesh();
-    venusSystem.add(venusRotationMesh);
-    const earthRotation = new Rotation(earthMesh);
-    const earthRotationMesh = earthRotation.getMesh();
-    earthSystem.add(earthRotationMesh);
-    const marsRotation = new Rotation(marsMesh);
-    const marsRotationMesh = marsRotation.getMesh();
-    marsSystem.add(marsRotationMesh);
-
-    // NOTE: Add solar system mesh GUI.
-    fetchData(mercuryRotationMesh, venusRotationMesh,  earthRotationMesh, marsRotationMesh)
-
-    // NOTE: Animate solar system at 60fps.
-    const EARTH_YEAR = 2 * Math.PI * (1 / 60) * (1 / 60);
-    const animate = () => {
-      sunMesh.rotation.y += 0.001;
-      mercurySystem.rotation.y += EARTH_YEAR * 4;
-      venusSystem.rotation.y += EARTH_YEAR * 2;
-      earthSystem.rotation.y += EARTH_YEAR;
-      marsSystem.rotation.y += EARTH_YEAR * 0.5;
+    // Animation loop
+    const animate = function () {
       requestAnimationFrame(animate);
+      planetSphere.rotation.y += 0.001; // Rotate the planet
+      clouds.rotation.y -= 0.01; // Rotate the clouds slowly
+      stars.forEach((star) => {
+        star.rotation.y += 0.001; // Rotate the stars slowly
+      });
+      moonShperes.forEach((moon) => {
+        moon.rotation.y += 0.002; // Rotate the moon
+      });
+      controls.update();
+      // Configure controls (optional)
+      controls.enableDamping = true; // Enable smooth camera movement
+      controls.dampingFactor = 0.25; // Set damping factor for smoother animation
+      controls.rotateSpeed = 0.5; // Adjust rotation speed
+      controls.zoomSpeed = 1.2; // Adjust zoom speed
+      controls.panSpeed = 0.5; // Adjust pan speed
+      controls.enableZoom = true; // Enable zooming
+      controls.enablePan = true; // Enable panning
+      controls.enableRotate = true; // Enable orbiting
+      renderer.render(scene, camera);
     };
-    animate();
-  }, []);
 
-  return (
-    <div className="flex flex-col items-center justify-center">
-      <canvas id="myThreeJsCanvas" />
-    </div>
-  );
-}
+    animate();
+
+    // Cleanup
+    return () => {
+      mountRef.current.removeChild(renderer.domElement);
+    };
+  }, [planet]);
+
+  return <div ref={mountRef} style={{ width: "100%", height: "100vh" }} />;
+};
 
 export default SolarSystem;
