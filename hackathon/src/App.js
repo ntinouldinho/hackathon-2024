@@ -4,15 +4,15 @@ import axios from 'axios';
 
 const planets = [
   { name: 'Moon', texture: 'textures/moon_1024.jpg'},
-  { name: 'Mercury', texture: 'https://threejs.org/examples/textures/planets/mercury_1024.jpg' },
-  { name: 'Venus', texture: 'https://threejs.org/examples/textures/planets/venus_surface_1024.jpg' },
-  { name: 'Earth', texture: 'https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg' },
-  { name: 'Mars', texture: 'https://threejs.org/examples/textures/planets/mars_1024.jpg' },
-  { name: 'Jupiter', texture: 'https://threejs.org/examples/textures/planets/jupiter_1024.jpg' },
-  { name: 'Saturn', texture: 'https://threejs.org/examples/textures/planets/saturn_1024.jpg' },
-  { name: 'Uranus', texture: 'https://threejs.org/examples/textures/planets/uranus_1024.jpg' },
-  { name: 'Neptune', texture: 'https://threejs.org/examples/textures/planets/neptune_1024.jpg' },
-  { name: 'Pluto', texture: 'https://threejs.org/examples/textures/planets/pluto_1024.jpg' }
+  { name: 'Mercury', texture: 'textures/mercury.jpeg' },
+  { name: 'Venus', texture: 'textures/venus.jpeg' },
+  { name: 'Earth', texture: 'textures/earth.jpeg' },
+  { name: 'Mars', texture: 'textures/mars.jpeg' },
+  { name: 'Jupiter', texture: 'textures/jupiter.jpeg' },
+  { name: 'Saturn', texture: 'textures/saturn.jpeg' },
+  { name: 'Uranus', texture: 'textures/uranus.jpeg' },
+  { name: 'Neptune', texture: 'textures/neptune.jpeg' },
+  { name: 'Pluto', texture: 'textures/pluto.jpeg' }
 ];
 
 const App = () => {
