@@ -1,48 +1,52 @@
 import React, { useState, useEffect } from "react";
-import Planet from "./Planet";
 import axios from "axios";
+import planetsConfig from "./planets.json";
+import SolarSystemPage2 from "./SolarSystemPage2";
 
-const planets = [
-  { name: "Moon", texture: "textures/moon_1024.jpg" },
-  { name: "Mercury", texture: "textures/mercury.jpeg" },
-  { name: "Venus", texture: "textures/venus.jpeg" },
-  { name: "Earth", texture: "textures/earth.jpeg" },
-  { name: "Mars", texture: "textures/mars.jpeg" },
-  { name: "Jupiter", texture: "textures/jupiter.jpeg" },
-  { name: "Saturn", texture: "textures/saturn.jpeg" },
-  { name: "Uranus", texture: "textures/uranus.jpeg" },
-  { name: "Neptune", texture: "textures/neptune.jpeg" },
-  { name: "Pluto", texture: "textures/pluto.jpg" },
-];
+// const planets = [
+//   { name: "Moon", texture: "textures/moon_1024.jpg" },
+//   { name: "Mercury", texture: "textures/mercury.jpeg" },
+//   { name: "Venus", texture: "textures/venus.jpeg" },
+//   { name: "Earth", texture: "textures/earth.jpeg" },
+//   { name: "Mars", texture: "textures/mars.jpeg" },
+//   { name: "Jupiter", texture: "textures/jupiter.jpeg" },
+//   { name: "Saturn", texture: "textures/saturn.jpeg" },
+//   { name: "Uranus", texture: "textures/uranus.jpeg" },
+//   { name: "Neptune", texture: "textures/neptune.jpeg" },
+//   { name: "Pluto", texture: "textures/pluto.jpg" },
+// ];
+
+const planets = ["Earth", "Neptune"];
 
 const App = () => {
-  const [planetss, setPlanets] = useState("Earth");
-  const [currentTexture, setCurrentTexture] = useState(planets[3].texture);
+  const [currentPlanet, setCurrentPlanet] = useState({
+    radius: 24764,
+    texture: "earth.jpeg",
+    moons: [
+      {
+        name: "Moon",
+        radius: 1737,
+        texture: "moon_1024.jpg",
+      },
+    ],
+  });
 
-  // useEffect(() => {
-  //   axios.get('http://localhost:5000/api/planets')
-  //     .then(response => {
-  //       setPlanets(response.data);
-  //       setCurrentTexture(response.data[0].texture);  // Set initial planet texture
-  //     })
-  //     .catch(error => console.error('Error fetching data: ', error));
-  // }, []);
+  // const [planetName, setPlanetName] = useState("Earth");
 
   return (
     <div>
       <h1>Planetary Viewer</h1>
       {planets.map((planet) => (
         <button
-          key={planet.name}
+          key={planet}
           onClick={() => {
-            setCurrentTexture(planet.texture);
-            setPlanets(planet.name);
+            setCurrentPlanet(planetsConfig[planet]);
           }}
         >
-          {planet.name}
+          {planet}
         </button>
       ))}
-      <Planet planetName={planetss} textureUrl={currentTexture} />
+      <SolarSystemPage2 planet={currentPlanet} />
     </div>
   );
 };

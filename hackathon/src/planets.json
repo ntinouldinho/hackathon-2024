@@ -1,0 +1,30 @@
+{
+    "Neptune": {
+        "radius": 24764,
+        "texture": "neptune.jpeg",
+        "moons": [
+            {
+                "name": "Triton",
+                "radius": 1353,
+                "texture": "Triton.jpeg"
+            },
+            {
+                "name": "Triton",
+                "radius": 1353,
+                "texture": "Triton.jpeg"
+            }
+        ]
+
+    },
+    "Earth": {
+        "radius": 24764,
+        "texture": "neptune.jpeg",
+        "moons": [
+            {
+                "name": "Moon",
+                "radius": 1737,
+                "texture": "moon_1024.jpg"
+            }
+        ]
+    }
+}
