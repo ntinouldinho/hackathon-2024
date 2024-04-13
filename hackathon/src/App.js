@@ -12,7 +12,7 @@ const planets = [
   { name: 'Saturn', texture: 'textures/saturn.jpeg' },
   { name: 'Uranus', texture: 'textures/uranus.jpeg' },
   { name: 'Neptune', texture: 'textures/neptune.jpeg' },
-  { name: 'Pluto', texture: 'textures/pluto.jpeg' }
+  { name: 'Pluto', texture: 'textures/pluto.jpg' }
 ];
 
 const App = () => {
