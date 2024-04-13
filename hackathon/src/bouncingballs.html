@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ball Falling in a Box: Gravity Comparison with Bounce and Reset</title>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        canvas { display: block; background: #f0f0f0; }
+        #planetSelector { position: absolute; top: 10px; left: 10px; z-index: 10; }
+    </style>
+</head>
+<body>
+<select id="planetSelector">
+    <option value="3.7">Mercury</option>
+    <option value="8.87">Venus</option>
+    <option value="9.81" selected>Earth</option>
+    <option value="3.711">Mars</option>
+    <option value="24.79">Jupiter</option>
+    <option value="10.44">Saturn</option>
+    <option value="8.69">Uranus</option>
+    <option value="11.15">Neptune</option>
+</select>
+<script src="https://cdn.jsdelivr.net/npm/three@0.150.0/build/three.min.js"></script>
+<script>
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0xf0f0f0);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    document.body.appendChild(renderer.domElement);
+
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0x404040, 2);
+    scene.add(ambientLight);
+    const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+    pointLight.position.set(10, 20, 20);
+    pointLight.castShadow = true;
+    scene.add(pointLight);
+
+    // Box geometry with edge lines
+    const boxGeometry = new THREE.BoxGeometry(5, 10, 5);
+    const boxMaterial = new THREE.MeshPhongMaterial({ color: 0x00ffcc, opacity: 0.2, transparent: true });
+    const box = new THREE.Mesh(boxGeometry, boxMaterial);
+    box.castShadow = true;
+    box.receiveShadow = true;
+    scene.add(box);
+
+    const edges = new THREE.EdgesGeometry(boxGeometry);
+    const lines = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x0000ff }));
+    scene.add(lines);
+
+    // Ball geometries
+    const ballGeometry = new THREE.SphereGeometry(0.4, 32, 32);
+    const earthMaterial = new THREE.MeshPhongMaterial({ color: 0x0033ff });
+    const earthBall = new THREE.Mesh(ballGeometry, earthMaterial);
+    earthBall.position.set(-1, 5, 0);
+    earthBall.castShadow = true;
+    earthBall.receiveShadow = true;
+    scene.add(earthBall);
+
+    const planetMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000 });
+    const planetBall = new THREE.Mesh(ballGeometry, planetMaterial);
+    planetBall.position.set(1, 5, 0);
+    planetBall.castShadow = true;
+    planetBall.receiveShadow = true;
+    scene.add(planetBall);
+
+    // Camera position
+    camera.position.set(0, 0, 20);
+
+    let earthGravity = 9.81; // m/s²
+    let planetGravity = 9.81; // m/s²
+    let earthVelocity = 0;
+    let planetVelocity = 0;
+    let lastTime = Date.now();
+
+    document.getElementById('planetSelector').addEventListener('change', function() {
+        planetGravity = parseFloat(this.value);
+        // Reset positions
+        earthBall.position.y = 5;
+        planetBall.position.y = 5;
+        // Reset velocities
+        earthVelocity = 0;
+        planetVelocity = 0;
+        // Reset the timer to avoid jump
+        lastTime = Date.now();
+    });
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        const now = Date.now();
+        const delta = (now - lastTime) / 1000;
+        lastTime = now;
+
+        // Update velocity based on gravity and time
+        earthVelocity += earthGravity * delta;
+        planetVelocity += planetGravity * delta;
+
+        // Update positions based on velocity
+        earthBall.position.y -= earthVelocity * delta;
+        planetBall.position.y -= planetVelocity * delta;
+
+        // Check for bounce
+        if (earthBall.position.y <= -5) {
+            earthVelocity *= -0.9; // Lose some energy on bounce
+            earthBall.position.y = -5;
+        }
+        if (planetBall.position.y <= -5) {
+            planetVelocity *= -0.9; // Lose some energy on bounce
+            planetBall.position.y = -5;
+        }
+
+        renderer.render(scene, camera);
+    }
+
+    animate();
+</script>
+</body>
+</html>
