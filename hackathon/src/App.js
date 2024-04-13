@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Planet from './Planet';
+import axios from 'axios';
 
 const planets = [
   { name: 'Moon', texture: 'https://threejs.org/examples/textures/planets/moon_1024.jpg'},
@@ -15,7 +16,18 @@ const planets = [
 ];
 
 const App = () => {
+  const [planetss, setPlanets] = useState([]);
   const [currentTexture, setCurrentTexture] = useState(planets[0].texture);
+
+
+  // useEffect(() => {
+  //   axios.get('http://localhost:5000/api/planets')
+  //     .then(response => {
+  //       setPlanets(response.data);
+  //       setCurrentTexture(response.data[0].texture);  // Set initial planet texture
+  //     })
+  //     .catch(error => console.error('Error fetching data: ', error));
+  // }, []);
 
   return (
     <div>
