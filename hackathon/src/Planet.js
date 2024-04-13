@@ -34,9 +34,8 @@ const Planet = ({ planetName, textureUrl }) => {
     const material = new THREE.MeshPhongMaterial({
       map: loader.load(textureUrl),
     });
-    const sphere = new THREE.Mesh(geometry, material);
-
-    scene.add(sphere);
+    const planet = new THREE.Mesh(geometry, material);
+    scene.add(planet);
 
     // Create a smaller sphere geometry (moon)
     const moonGeometry = new THREE.SphereGeometry(0.3, 32, 32);
@@ -129,6 +128,18 @@ const Planet = ({ planetName, textureUrl }) => {
       controls.enableRotate = true; // Enable orbiting
       renderer.render(scene, camera);
     };
+    // Animation loop to let you spin the planet around
+    // const animate = function () {
+    //   requestAnimationFrame(animate);
+    //   controls.update();
+    //   renderer.render(scene, camera);
+    // };
+
+    // function animate() {
+    //     requestAnimationFrame(animate);
+    //     planet.rotation.y += 0.01; // Controls the rotation speed
+    //     renderer.render(scene, camera);
+    // }
 
     animate();
 
