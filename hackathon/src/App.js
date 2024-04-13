@@ -3,7 +3,7 @@ import Planet from './Planet';
 import axios from 'axios';
 
 const planets = [
-  { name: 'Moon', texture: 'http://localhost:3000/textures/moon_1024.jpg'},
+  { name: 'Moon', texture: 'textures/moon_1024.jpg'},
   { name: 'Mercury', texture: 'https://threejs.org/examples/textures/planets/mercury_1024.jpg' },
   { name: 'Venus', texture: 'https://threejs.org/examples/textures/planets/venus_surface_1024.jpg' },
   { name: 'Earth', texture: 'https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg' },
