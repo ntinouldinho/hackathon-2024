@@ -16,9 +16,10 @@ import SolarSystemPage2 from "./SolarSystemPage2";
 //   { name: "Pluto", texture: "textures/pluto.jpg" },
 // ];
 
-const planets = ["Earth", "Neptune"];
+const planets = ["Earth", "Neptune", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Pluto"];
 
 const App = () => {
+  console.log(planetsConfig);
   const [currentPlanet, setCurrentPlanet] = useState({
     radius: 24764,
     texture: "earth.jpeg",
@@ -41,6 +42,7 @@ const App = () => {
           key={planet}
           onClick={() => {
             setCurrentPlanet(planetsConfig[planet]);
+            
           }}
         >
           {planet}

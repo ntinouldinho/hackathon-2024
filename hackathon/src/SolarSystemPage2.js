@@ -35,6 +35,20 @@ const SolarSystemPage2 = ({ planet }) => {
 
     scene.add(planetSphere);
 
+    // Create Saturn's rings
+    const loader = new THREE.TextureLoader();
+    const ringGeometry = new THREE.TorusGeometry(4, 0.5, 2.5, 100);
+    const ringMaterial = new THREE.MeshPhongMaterial({
+      map: loader.load("textures/verticalring.jpeg"),
+      side: THREE.DoubleSide,
+    });
+    const rings = new THREE.Mesh(ringGeometry, ringMaterial);
+    scene.add(rings);
+    rings.position.set(0, 0, 0);
+
+    // Rotate the rings to be in the plane of the ecliptic
+    rings.rotation.x = Math.PI / 2 - 3;
+
     // Add the moons
     const moonShperes = [];
     planet.moons.forEach((moon) => {
@@ -45,8 +59,12 @@ const SolarSystemPage2 = ({ planet }) => {
       const moonSphere = getSpherePlanet(0.3, moon.texture);
 
       scene.add(moonSphere);
-      moonSphere.position.set(4, 0, 0); // Position the moon next to the planet
-      //   //   moonSphere.position.set(THREE.MathUtils.randFloat(4, 9), 0, 0); // Position the moon next to the planet
+      // moonSphere.position.set(4, 0, 0); // Position the moon next to the planet
+      moonSphere.position.set(
+        getRandomNumber(),
+        getRandomNumber(),
+        getRandomNumber()
+      ); // Position the moon next to the planet
 
       moonShperes.push(moonSphere);
     });
@@ -109,6 +127,9 @@ const SolarSystemPage2 = ({ planet }) => {
       controls.enableZoom = true; // Enable zooming
       controls.enablePan = true; // Enable panning
       controls.enableRotate = true; // Enable orbiting
+
+      rings.rotation.z += 0.001;
+
       renderer.render(scene, camera);
     };
 
@@ -122,5 +143,29 @@ const SolarSystemPage2 = ({ planet }) => {
 
   return <div ref={mountRef} style={{ width: "100%", height: "100vh" }} />;
 };
+
+// Generate a random number between -4 and -2 or between 2 and 4
+function getRandomNumber() {
+  // Generate a random number between 0 and 1
+  const randomNumber = Math.random();
+
+  // Determine if the number should be negative or positive
+  const isNegative = Math.random() < 0.5;
+
+  // Determine the range
+  let min, max;
+  if (isNegative) {
+    min = -4;
+    max = -2;
+  } else {
+    min = 2;
+    max = 4;
+  }
+
+  // Calculate the random number within the specified range
+  const randomInRange = Math.random() * (max - min) + min;
+
+  return randomInRange;
+}
 
 export default SolarSystemPage2;
