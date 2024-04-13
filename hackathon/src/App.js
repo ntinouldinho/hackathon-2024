@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import planetsConfig from "./planets.json";
 import SolarSystemPage2 from "./SolarSystemPage2";
+import QuizModal from "./QuizModal";
 
 // const planets = [
 //   { name: "Moon", texture: "textures/moon_1024.jpg" },
@@ -16,13 +17,24 @@ import SolarSystemPage2 from "./SolarSystemPage2";
 //   { name: "Pluto", texture: "textures/pluto.jpg" },
 // ];
 
-const planets = ["Earth", "Neptune", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Pluto"];
+const planets = [
+  "Earth",
+  "Neptune",
+  "Mercury",
+  "Venus",
+  "Mars",
+  "Jupiter",
+  "Saturn",
+  "Uranus",
+  "Pluto",
+];
 
 const App = () => {
   console.log(planetsConfig);
   const [currentPlanet, setCurrentPlanet] = useState({
     radius: 24764,
     texture: "earth.jpeg",
+    ring: "",
     moons: [
       {
         name: "Moon",
@@ -35,21 +47,23 @@ const App = () => {
   // const [planetName, setPlanetName] = useState("Earth");
 
   return (
-    <div>
-      <h1>Planetary Viewer</h1>
-      {planets.map((planet) => (
-        <button
-          key={planet}
-          onClick={() => {
-            setCurrentPlanet(planetsConfig[planet]);
-            
-          }}
-        >
-          {planet}
-        </button>
-      ))}
-      <SolarSystemPage2 planet={currentPlanet} />
-    </div>
+    <>
+      <div>
+        {/* <h1>Planetary Viewer</h1> */}
+        <QuizModal />
+        {planets.map((planet) => (
+          <button
+            key={planet}
+            onClick={() => {
+              setCurrentPlanet(planetsConfig[planet]);
+            }}
+          >
+            {planet}
+          </button>
+        ))}
+        <SolarSystemPage2 planet={currentPlanet} />
+      </div>
+    </>
   );
 };
 
