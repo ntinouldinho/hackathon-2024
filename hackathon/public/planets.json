@@ -114,7 +114,7 @@
         ]
     },
     "Uranus": {
-        "radius": 60268,
+        "radius": 25362,
         "texture": "uranus.jpeg",
         "moons": [
             {
@@ -141,6 +141,22 @@
                 "name": "Oberon",
                 "radius": 761,
                 "texture": "Oberon.jpeg"
+            }
+        ]
+    },
+    "Mars": {
+        "radius": 3389,
+        "texture": "mars.jpeg",
+        "moons": [
+            {
+                "name": "Phobos",
+                "radius": 11,
+                "texture": "Phobos.png"
+            },
+            {
+                "name": "Deimos",
+                "radius": 6,
+                "texture": "Deimos.png"
             }
         ]
     }
