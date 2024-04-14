@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { Quiz } from "./quiz";
 import {Modal} from "./Modal"
 import { Learn } from "./learn";
+import { Chat } from "./chat";
 // import 'bootstrap/dist/css/bootstrap.css';
 
 const SolarSystemPage2 = () => {
@@ -15,8 +16,12 @@ const SolarSystemPage2 = () => {
   const mouse = new THREE.Vector2();
   const raycaster = new THREE.Raycaster();
   const [tooltip, setTooltip] = useState({ visible: false, content: "" });
+
   const [quizModalOpen, setQuizModalOpen] = useState(false);
   const [learnModalOpen, setLearnModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+
   let { name } = useParams(); 
   const [planetName, setPlanetName] = useState(name)
   const planetsWithAtmosphere = ["Earth"]
@@ -291,8 +296,11 @@ const SolarSystemPage2 = () => {
         
         <button onClick={() => setLearnModalOpen(true)}>Start Learning</button>
         <button onClick={() => setQuizModalOpen(true)}>Start Quiz</button>
-      {planetName && <Modal isOpen={learnModalOpen} onClose={() => setLearnModalOpen(false)} children={<Learn planet={planetName} />} />}
-      {planetName && <Modal isOpen={quizModalOpen} onClose={() => setQuizModalOpen(false)} children={<Quiz planet={planetName} />} />}
+        <button onClick={() => setChatOpen(true)}>Start Chat</button>
+      {learnModalOpen && <Modal isOpen={learnModalOpen} onClose={() => setLearnModalOpen(false)} children={<Learn planet={planetName} />} />}
+      {quizModalOpen && <Modal isOpen={quizModalOpen} onClose={() => setQuizModalOpen(false)} children={<Quiz planet={planetName} />} />}
+      {quizModalOpen && <Modal isOpen={quizModalOpen} onClose={() => setModalOpen(false)} children={<Quiz planet={planetName} />} />}
+      {chatOpen && <Modal isOpen={chatOpen} onClose={() => setChatOpen(false)} children={<Chat planet={planetName} />} />}
       
     </div>
   );
