@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import planetsConfig from "./planets.json";
 import SolarSystemPage2 from "./SolarSystemPage2";
-import QuizModal from "./QuizModal";
+// import SolarSystem from "./SolarSystem";
 
 // const planets = [
 //   { name: "Moon", texture: "textures/moon_1024.jpg" },
@@ -61,6 +61,7 @@ const App = () => {
             {planet}
           </button>
         ))}
+        {/* <SolarSystem /> */}
         <SolarSystemPage2 planet={currentPlanet} />
       </div>
     </>
