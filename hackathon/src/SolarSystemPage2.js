@@ -101,7 +101,7 @@ const SolarSystemPage2 = () => {
     
     scene.add(planetSphere);
 
-    const rings = getRings(planet.ring, 0.5);
+    const rings = getRings(planet.ring, 1);
     if (rings) {
       scene.add(rings);
       rings.position.set(0, 0, 0);
@@ -371,13 +371,25 @@ function getRings(texture, tube) {
   if (texture === "") return null;
 
   // Create planet's rings
-  const loader = new THREE.TextureLoader();
-  const ringGeometry = new THREE.TorusGeometry(4, tube, 2.5, 100);
+  const textureLoader = new THREE.TextureLoader();
+  const rText = textureLoader.load('../../textures/' + texture, function (tex) {
+  // Repeat the texture along the torus' circumference
+  tex.wrapS = THREE.RepeatWrapping;
+  tex.wrapT = THREE.RepeatWrapping;
+  tex.repeat.set(4, 1); // You may need to adjust these values
+  tex.rotation = Math.PI / 2;
+  // '4' could be any number that helps the texture repeat around the ring
+  // '1' means the texture will not repeat along the thickness of the ring
+  }); 
   const ringMaterial = new THREE.MeshPhongMaterial({
-    map: loader.load("../../textures/" + texture),
+    map: rText,
     side: THREE.DoubleSide,
   });
+
+  const ringGeometry = new THREE.TorusGeometry(4.5, tube, 2.5, 50);
   const rings = new THREE.Mesh(ringGeometry, ringMaterial);
+
+
 
   return rings;
 }

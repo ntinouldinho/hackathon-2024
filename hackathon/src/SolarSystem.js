@@ -51,7 +51,7 @@ const SolarSystem = () => {
     let venusSystem = new THREE.Group();
     venusSystem.add(venusMesh);
 
-    const earth = new Planet(4, 48, "textures/earth.jpeg", "Earth");
+    const earth = new Planet(4, 48, "textures/earth.jpg", "Earth");
     const earthMesh = earth.getMesh();
     let earthSystem = new THREE.Group();
     earthSystem.add(earthMesh);

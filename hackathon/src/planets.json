@@ -29,7 +29,7 @@
     "Jupiter": {
         "radius": 69911,
         "texture": "jupiter.jpeg",
-        "ring": "verticalring.jpeg",
+        "ring": "",
         "moons": [
             {
                 "name": "Io",
@@ -65,7 +65,7 @@
     },
     "Earth": {
         "radius": 6371,
-        "texture": "earth.jpeg",
+        "texture": "earth.jpg",
         "ring": "",
         "moons": [
             {
@@ -78,7 +78,7 @@
     "Saturn": {
         "radius": 60268,
         "texture": "saturn.jpeg",
-        "ring":"verticalring.jpeg",
+        "ring":"saturn2.png",
         "moons": [
             {
                 "name": "Titan",
