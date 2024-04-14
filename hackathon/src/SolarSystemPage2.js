@@ -57,7 +57,8 @@ const SolarSystemPage2 = ({ planet }) => {
     // Add the sun
     // Create sun geometry and material
     const loader = new THREE.TextureLoader();
-    const sunGeometry = new THREE.SphereGeometry(10, 32, 32); // Adjust size as needed
+    const sunRadius = 10;
+    const sunGeometry = new THREE.SphereGeometry(sunRadius, 32, 32); // Adjust size as needed
     const sunMaterial = new THREE.MeshBasicMaterial({
       color: 0xffff00,
       map: loader.load("textures/sun.jpeg"),
@@ -65,11 +66,12 @@ const SolarSystemPage2 = ({ planet }) => {
 
     const sun = new THREE.Mesh(sunGeometry, sunMaterial);
     scene.add(sun);
-    sun.position.set(-60, 40, -80);
+    sun.position.set(-30, 0, -40);
 
     // Add the Planet
-    const planetSphere = getPlanet(3, planet.texture);
-
+    const planetRadius = 3;
+    const planetSphere = getPlanet(planetRadius, planet.texture);
+    
     scene.add(planetSphere);
     planetSphere.position.set(10, 1, 1);
 
@@ -124,6 +126,50 @@ const SolarSystemPage2 = ({ planet }) => {
       scene.add(star);
       stars.push(star);
     }
+
+    const gridSize = 200;
+    const gridStep = 2;
+    const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff });
+    const verticalPos = -3;
+
+      // Gravitational field calculation incorporating body size
+    function calculateGravitationalCurve(x, z, bodies) {
+        return bodies.reduce((acc, body) => {
+          const dx = x - body.position.x;
+          const dz = z - body.position.z;
+          const distance = Math.sqrt(dx * dx + dz * dz);
+          // const sigma = 10;
+          const G = 20;
+          const gravityEffect = -G * (body.radius / (distance/4));
+          // const gravityEffect = -10 * (body.radius / distance)*distance;
+          return acc + gravityEffect;
+        }, 0);
+      }
+  
+      // Define bodies with their positions and radii
+      const bodies = [
+        { position: planetSphere.position, radius: planetRadius },
+        { position: sun.position, radius: sunRadius }
+      ];
+  
+      // Create grid lines influenced by gravitational fields of both bodies
+      for (let x = -gridSize; x <= gridSize; x += gridStep) {
+        const pointsH = [];
+        const pointsV = [];
+        for (let z = -gridSize; z <= gridSize; z += gridStep) {
+          const curveDepthH = calculateGravitationalCurve(x, z, bodies);
+          const curveDepthV = calculateGravitationalCurve(z, x, bodies);
+          pointsH.push(new THREE.Vector3(x, verticalPos + curveDepthH, z));
+          pointsV.push(new THREE.Vector3(z, verticalPos + curveDepthV, x));
+        }
+        const geometryH = new THREE.BufferGeometry().setFromPoints(pointsH);
+        const lineH = new THREE.Line(geometryH, lineMaterial);
+        scene.add(lineH);
+  
+        const geometryV = new THREE.BufferGeometry().setFromPoints(pointsV);
+        const lineV = new THREE.Line(geometryV, lineMaterial);
+        scene.add(lineV);
+      }
 
     camera.position.z = 10;
     // camera.position.x = 10;

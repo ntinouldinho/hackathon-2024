@@ -50,7 +50,6 @@ const App = () => {
     <>
       <div>
         {/* <h1>Planetary Viewer</h1> */}
-        <QuizModal />
         {planets.map((planet) => (
           <button
             key={planet}
