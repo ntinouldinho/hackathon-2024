@@ -109,7 +109,6 @@ const SolarSystemPage2 = () => {
     const planetSphere = getPlanet(planetRadius, planet.texture);
     
     scene.add(planetSphere);
-    planetSphere.position.set(10, 1, 1);
 
     const rings = getRings(planet.ring, 0.5);
     if (rings) {
@@ -130,7 +129,6 @@ const SolarSystemPage2 = () => {
       const moonSphere = getPlanet(0.3, moon.texture);
 
       scene.add(moonSphere);
-      // moonSphere.position.set(4, 0, 0); // Position the moon next to the planet
       moonSphere.position.set(
         getRandomNumber(1.5, 3),
         getRandomNumber(1.5, 3),
@@ -208,8 +206,7 @@ const SolarSystemPage2 = () => {
       }
 
     camera.position.z = 10;
-    // camera.position.x = 10;
-    // camera.position.y = 20;
+    // camera.position.set(10, 10, 10);
 
     // camera.lookAt(moon.position);
 
@@ -239,10 +236,9 @@ const SolarSystemPage2 = () => {
       controls.enablePan = true; // Enable panning
       controls.enableRotate = true; // Enable orbiting
 
-      // particleSystem.rotation.x += 0.001;
-      // particleSystem.rotation.y += 0.001;
-
       if (rings) rings.rotation.z += 0.001;
+
+      camera.rotateY += 0.1
 
       renderer.render(scene, camera);
     };
