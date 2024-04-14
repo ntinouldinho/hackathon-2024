@@ -41,45 +41,45 @@ const SolarSystem = () => {
       solarSystem.add(sunMesh);
       test.scene.add(solarSystem);
 
-    const mercury = new Planet(2, 16, "textures/mercury.jpeg", "Mercury");
-    const mercuryMesh = mercury.getMesh();
-    let mercurySystem = new THREE.Group();
-    mercurySystem.add(mercuryMesh);
+      const mercury = new Planet(2, 13, "textures/mercury.jpeg", "Mercury");
+      const mercuryMesh = mercury.getMesh();
+      let mercurySystem = new THREE.Group();
+      mercurySystem.add(mercuryMesh);
 
-    const venus = new Planet(3, 32, "textures/venus.jpeg", "Venus");
-    const venusMesh = venus.getMesh();
-    let venusSystem = new THREE.Group();
-    venusSystem.add(venusMesh);
+      const venus = new Planet(3, -20, "textures/venus.jpeg", "Venus");
+      const venusMesh = venus.getMesh();
+      let venusSystem = new THREE.Group();
+      venusSystem.add(venusMesh);
 
-    const earth = new Planet(4, 48, "textures/earth.jpeg", "Earth");
-    const earthMesh = earth.getMesh();
-    let earthSystem = new THREE.Group();
-    earthSystem.add(earthMesh);
+      const earth = new Planet(4, 30, "textures/earth.jpeg", "Earth");
+      const earthMesh = earth.getMesh();
+      let earthSystem = new THREE.Group();
+      earthSystem.add(earthMesh);
 
-    const mars = new Planet(3, 64, "textures/mars.jpeg", "Mars");
-    const marsMesh = mars.getMesh();
-    let marsSystem = new THREE.Group();
-    marsSystem.add(marsMesh);
+      const mars = new Planet(3, -40, "textures/mars.jpeg", "Mars");
+      const marsMesh = mars.getMesh();
+      let marsSystem = new THREE.Group();
+      marsSystem.add(marsMesh);
 
-    const jupiter = new Planet(5, 48, "textures/jupiter.jpeg", "Jupiter");
-    const jupiterMesh = jupiter.getMesh();
-    let jupiterSystem = new THREE.Group();
-    jupiterSystem.add(jupiterMesh);
+      const jupiter = new Planet(5, 53, "textures/jupiter.jpeg", "Jupiter");
+      const jupiterMesh = jupiter.getMesh();
+      let jupiterSystem = new THREE.Group();
+      jupiterSystem.add(jupiterMesh);
 
-    const saturn = new Planet(6, -48, "textures/saturn.jpeg", "Saturn");
-    const saturnMesh = saturn.getMesh();
-    let saturnSystem = new THREE.Group();
-    saturnSystem.add(saturnMesh);
+      const saturn = new Planet(6, -53, "textures/saturn.jpeg", "Saturn");
+      const saturnMesh = saturn.getMesh();
+      let saturnSystem = new THREE.Group();
+      saturnSystem.add(saturnMesh);
 
-    const uranus = new Planet(6, 76, "textures/uranus.jpeg", "Uranus");
-    const uranusMesh = uranus.getMesh();
-    let uranusSystem = new THREE.Group();
-    uranusSystem.add(uranusMesh);
+      const uranus = new Planet(5, 70, "textures/uranus.jpeg", "Uranus");
+      const uranusMesh = uranus.getMesh();
+      let uranusSystem = new THREE.Group();
+      uranusSystem.add(uranusMesh);
 
-    const neptune = new Planet(6, -76, "textures/neptune.jpeg", "Neptune");
-    const neptuneMesh = neptune.getMesh();
-    let neptuneSystem = new THREE.Group();
-    neptuneSystem.add(neptuneMesh);
+      const neptune = new Planet(5, -70, "textures/neptune.jpeg", "Neptune");
+      const neptuneMesh = neptune.getMesh();
+      let neptuneSystem = new THREE.Group();
+      neptuneSystem.add(neptuneMesh);
 
       let backgroundSystem = new THREE.Group();
       // Create a background with animated clouds and stars
@@ -105,7 +105,6 @@ const SolarSystem = () => {
         stars.push(star);
       }
 
-
       solarSystem.add(
         mercurySystem,
         venusSystem,
@@ -115,7 +114,7 @@ const SolarSystem = () => {
         saturnSystem,
         uranusSystem,
         neptuneSystem,
-        backgroundSystem,
+        backgroundSystem
       );
 
       const mercuryRotation = new Rotation(mercuryMesh);
@@ -174,12 +173,10 @@ const SolarSystem = () => {
         venusSystem.rotation.y -= EARTH_YEAR * 2;
         earthSystem.rotation.y += EARTH_YEAR;
         marsSystem.rotation.y += EARTH_YEAR * 0.5;
-
-        // speeds to be corrected
-        jupiterSystem.rotation.y += EARTH_YEAR * 0.5;
-        saturnSystem.rotation.y += EARTH_YEAR * 0.5;
-        uranusSystem.rotation.y += EARTH_YEAR * 0.5;
-        neptuneSystem.rotation.y += EARTH_YEAR * 0.5;
+        jupiterSystem.rotation.y += EARTH_YEAR * 2.5;
+        saturnSystem.rotation.y += EARTH_YEAR * 2.5;
+        uranusSystem.rotation.y += EARTH_YEAR * 1.5;
+        neptuneSystem.rotation.y += EARTH_YEAR * 1.5;
 
         requestAnimationFrame(animate);
       };
