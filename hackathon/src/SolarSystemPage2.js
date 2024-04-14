@@ -97,20 +97,6 @@ const SolarSystemPage2 = () => {
     pointLight.position.set(5, 3, 5);
     scene.add(pointLight);
 
-    // Add the sun
-    // Create sun geometry and material
-    const loader = new THREE.TextureLoader();
-    const sunRadius = 10;
-    const sunGeometry = new THREE.SphereGeometry(sunRadius, 32, 32); // Adjust size as needed
-    const sunMaterial = new THREE.MeshBasicMaterial({
-      color: 0xffff00,
-      map: loader.load("../../textures/sun.jpeg"),
-    }); // Yellow color for the sun
-
-    const sun = new THREE.Mesh(sunGeometry, sunMaterial);
-    scene.add(sun);
-    sun.position.set(-30, 0, -40);
-
     // Add the Planet
     const planetRadius = 3;
     const planetSphere = getPlanet(planetRadius, planet.texture);
@@ -189,8 +175,7 @@ const SolarSystemPage2 = () => {
   
       // Define bodies with their positions and radii
       const bodies = [
-        { position: planetSphere.position, radius: planetRadius },
-        { position: sun.position, radius: sunRadius }
+        { position: planetSphere.position, radius: planetRadius }
       ];
   
       // Create grid lines influenced by gravitational fields of both bodies
@@ -222,7 +207,6 @@ const SolarSystemPage2 = () => {
     // Animation loop
     const animate = function () {
       requestAnimationFrame(animate);
-      sun.rotation.y += 0.0001;
       planetSphere.rotation.y += 0.001; // Rotate the planet
       // clouds.rotation.y -= 0.01; // Rotate the clouds slowly
       stars.forEach((star) => {
