@@ -1,0 +1,154 @@
+{
+    "Earth":[
+       {
+          "question":"What is Earth often called due to its appearance from space?",
+          "answers":[
+             {
+                "text":"Red Planet",
+                "correct":false
+             },
+             {
+                "text":"Blue Planet",
+                "correct":true
+             },
+             {
+                "text":"Green Planet",
+                "correct":false
+             },
+             {
+                "text":"Yellow Planet",
+                "correct":false
+             }
+          ],
+          "feedback":{
+             "correct":"Correct! Earth is known as the Blue Planet because of its vast oceans.",
+             "incorrect":"Oops! While Earth is indeed colorful, it's most commonly referred to as the Blue Planet because of its predominantly blue appearance from space."
+          }
+       },
+       {
+          "question":"What percentage of Earth's surface is covered by water?",
+          "answers":[
+             {
+                "text":"50%",
+                "correct":false
+             },
+             {
+                "text":"71%",
+                "correct":true
+             },
+             {
+                "text":"30%",
+                "correct":false
+             },
+             {
+                "text":"90%",
+                "correct":false
+             }
+          ],
+          "feedback":{
+             "correct":"Correct! About 71% of Earth's surface is covered in water.",
+             "incorrect":"Whoops! Earth's surface is actually about 71% water."
+          }
+       },
+       {
+          "question":"What causes Earth's day and night cycle?",
+          "answers":[
+             {
+                "text":"The Moon's rotation",
+                "correct":false
+             },
+             {
+                "text":"Earth's orbit around the Sun",
+                "correct":false
+             },
+             {
+                "text":"Earth's magnetic field",
+                "correct":false
+             },
+             {
+                "text":"Earth's axis rotation",
+                "correct":true
+             }
+          ],
+          "feedback":{
+             "correct":"Correct! Earth's day and night cycle is caused by its rotation on its axis.",
+             "incorrect":"Not quite! Earth's day and night cycle is caused by its rotation on its axis, like a spinning top."
+          }
+       },
+       {
+          "question":"What gives Earth its changing seasons?",
+          "answers":[
+             {
+                "text":"The tilt of Earth's axis",
+                "correct":true
+             },
+             {
+                "text":"Earth's distance from the Sun",
+                "correct":false
+             },
+             {
+                "text":"The Moon's orbit",
+                "correct":false
+             },
+             {
+                "text":"Earth's magnetic field",
+                "correct":false
+             }
+          ],
+          "feedback":{
+             "correct":"Correct! Earth's changing seasons are caused by the tilt of its axis.",
+             "incorrect":"Close, but not quite! Earth's changing seasons are actually caused by the tilt of its axis as it orbits the Sun."
+          }
+       },
+       {
+          "question":"Which natural feature helps protect Earth from harmful space objects?",
+          "answers":[
+             {
+                "text":"Mountains",
+                "correct":false
+             },
+             {
+                "text":"Atmosphere",
+                "correct":true
+             },
+             {
+                "text":"Deserts",
+                "correct":false
+             },
+             {
+                "text":"Forests",
+                "correct":false
+             }
+          ],
+          "feedback":{
+             "correct":"Correct! Earth's atmosphere acts as a protective shield against meteors and other space debris.",
+             "incorrect":"Oops! While mountains, deserts, and forests are important, it's the atmosphere that protects us from harmful space objects."
+          }
+       },
+       {
+          "question":"What is the continuous movement of water on Earth called?",
+          "answers":[
+             {
+                "text":"Ocean dance",
+                "correct":false
+             },
+             {
+                "text":"Water swirl",
+                "correct":false
+             },
+             {
+                "text":"Water cycle",
+                "correct":true
+             },
+             {
+                "text":"Aqua flow",
+                "correct":false
+             }
+          ],
+          "feedback":{
+             "correct":"Correct! The continuous movement of water on Earth is called the water cycle.",
+             "incorrect":"Not quite! The continuous movement of water on Earth, involving evaporation, condensation, and precipitation, is known as the water cycle."
+          }
+       }
+    ]
+ }
