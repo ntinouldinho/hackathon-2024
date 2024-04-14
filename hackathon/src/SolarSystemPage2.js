@@ -78,8 +78,6 @@ const SolarSystemPage2 = () => {
   
       // Calculate objects intersecting the picking ray. Assume 'planetSphere' is the mesh you want to check.
       const intersects = raycaster.intersectObjects([planetSphere]);
-  
-      
       
     };
   
@@ -113,6 +111,11 @@ const SolarSystemPage2 = () => {
       rings.rotation.x = Math.PI / 2 - 3;
     }
 
+    // Define bodies with their positions and radii
+    const bodies = [
+      { position: planetSphere.position, radius: planetRadius }
+    ];
+
     // Add the moons
     const moonShperes = [];
     planet.moons.forEach((moon) => {
@@ -122,14 +125,19 @@ const SolarSystemPage2 = () => {
       console.log(moon.texture);
       const moonSphere = getPlanet(0.3, moon.texture);
 
-      scene.add(moonSphere);
+      //scene.add(moonSphere);
       moonSphere.position.set(
         getRandomNumber(1.5, 3),
         getRandomNumber(1.5, 3),
         getRandomNumber(1.5, 3)
       ); // Position the moon next to the planet
-
+      scene.add(moonSphere); // Add moon to the scene
       moonShperes.push(moonSphere);
+
+      bodies.push({
+        position: moonSphere.position,
+        radius: radi
+      });
     });
 
     // Create a background with animated clouds and stars
@@ -173,11 +181,8 @@ const SolarSystemPage2 = () => {
           return acc + gravityEffect;
         }, 0);
       }
-  
-      // Define bodies with their positions and radii
-      const bodies = [
-        { position: planetSphere.position, radius: planetRadius }
-      ];
+
+      
   
       // Create grid lines influenced by gravitational fields of both bodies
       for (let x = -gridSize; x <= gridSize; x += gridStep) {
@@ -293,6 +298,27 @@ const SolarSystemPage2 = () => {
         e.target.style.transform = 'scale(1)';
       }}>Start Quiz</button>
        <button onClick={() => setAnimationOpen(true)} style={{
+        position: 'absolute',
+        left: '510px',
+        margin: '10px',
+        padding: '10px 20px',
+        background: 'linear-gradient(145deg,  #1f77fe,  #0808af )',
+        color: 'white',
+        fontSize: '16px',
+        borderRadius: '3px',
+        border: 'none',
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+        transition: 'all 0.3s ease-in-out'
+      }}
+      onMouseOver={e => {
+        e.target.style.transform = 'scale(1.05)';
+      }}
+      onMouseOut={e => {
+        e.target.style.transform = 'scale(1)';
+      }}>Start Animation</button>
+      <button onClick={() => setChatOpen(true)} style={{
         position: 'absolute',
         right: '0',
         margin: '10px',
