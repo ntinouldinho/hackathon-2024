@@ -3,15 +3,20 @@ import * as THREE from "three";
 import { FontLoader } from "three/addons/loaders/FontLoader.js";
 import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import planetsConfig from "./planets.json";
+import { useParams } from 'react-router-dom';
 
-const SolarSystemPage2 = ({ planet }) => {
+const SolarSystemPage2 = () => {
   const mountRef = useRef(null);
   const mouse = new THREE.Vector2();
   const raycaster = new THREE.Raycaster();
   const [tooltip, setTooltip] = useState({ visible: false, content: "" });
+  let { name } = useParams(); 
+  let planet;
 
   useEffect(() => {
-    // Scene Setup
+    planet = planetsConfig[name]
+    
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -21,6 +26,7 @@ const SolarSystemPage2 = ({ planet }) => {
     );
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    
     mountRef.current.appendChild(renderer.domElement);
 
     // Create axes
@@ -247,8 +253,9 @@ const SolarSystemPage2 = ({ planet }) => {
     return () => {
       mountRef.current.removeChild(renderer.domElement);
       window.removeEventListener('click', onClick);
+      // mountRef.current.removeChild(renderer.domElement);
     };
-  }, [planet]);
+  }, []);
 
   return (
     <div ref={mountRef} style={{ width: "100%", height: "100vh" }}>
