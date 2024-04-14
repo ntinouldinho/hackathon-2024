@@ -16,6 +16,10 @@ const SolarSystemPage2 = () => {
   const [modalOpen, setModalOpen] = useState(false);
   let { name } = useParams(); 
   const [planetName, setPlanetName] = useState(name)
+  const planetsWithAtmosphere = ["Earth"]
+
+  const hasAtmosphere = planetsWithAtmosphere.includes(planetName);
+
   let planet;
   const handleCloseTooltip = () => {
     setTooltip(prev => ({ ...prev, visible: false }));
@@ -113,7 +117,7 @@ const SolarSystemPage2 = () => {
 
     // Add the Planet
     const planetRadius = 3;
-    const planetSphere = getPlanet(planetRadius, planet.texture);
+    const planetSphere = getPlanet(planetRadius, planet.texture, hasAtmosphere);
     
     scene.add(planetSphere);
 
@@ -330,7 +334,7 @@ function getRandomNumber(minVal, maxVal) {
   return randomInRange;
 }
 
-function getPlanet(radius, texture) {
+function getPlanet(radius, texture, hasAtmosphere=false) {
   // Texture and Geometry
   const loader = new THREE.TextureLoader();
   const geometry = new THREE.SphereGeometry(radius, 32, 32);
@@ -338,7 +342,19 @@ function getPlanet(radius, texture) {
     map: loader.load("../../textures/" + texture),
   });
   const sphere = new THREE.Mesh(geometry, material);
-
+  if(hasAtmosphere){
+    const atmosphereMaterial = new THREE.MeshBasicMaterial({
+      color: 0x0000ff,
+      transparent: true,
+      opacity: 0.2,
+      blending: THREE.AdditiveBlending,
+      side: THREE.DoubleSide
+    });
+  
+    const atmosphereGeometry = new THREE.SphereGeometry(radius * 1.1, 32, 32);
+    const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+    sphere.add(atmosphere);
+  }
   return sphere;
 }
 
