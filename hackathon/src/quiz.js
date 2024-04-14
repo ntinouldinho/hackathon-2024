@@ -11,10 +11,9 @@ export const Quiz = ({ planet }) => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [showNextButton, setShowNextButton] = useState(false);
   const [showStartButton, setShowStartButton] = useState(true);
-  console.log(importedQuestions, planet)
+  
   useEffect(() => {
     if (planet) {
-        console.log(importedQuestions, planet)
       setQuestions(importedQuestions[planet].sort(() => Math.random() - 0.5));
     }
   }, []);
