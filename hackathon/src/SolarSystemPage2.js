@@ -7,19 +7,28 @@ import planetsConfig from "./planets.json";
 import { useParams } from 'react-router-dom';
 import { Quiz } from "./quiz";
 import {Modal} from "./Modal"
+import { Learn } from "./learn";
+import { Chat } from "./chat";
+// import 'bootstrap/dist/css/bootstrap.css';
 
 const SolarSystemPage2 = () => {
   const mountRef = useRef(null);
   const mouse = new THREE.Vector2();
   const raycaster = new THREE.Raycaster();
   const [tooltip, setTooltip] = useState({ visible: false, content: "" });
+
+  const [quizModalOpen, setQuizModalOpen] = useState(false);
+  const [learnModalOpen, setLearnModalOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+
   let { name } = useParams(); 
   const [planetName, setPlanetName] = useState(name)
+  const planetsWithAtmosphere = ["Earth"]
+
+  const hasAtmosphere = planetsWithAtmosphere.includes(planetName);
+
   let planet;
-  const handleCloseTooltip = () => {
-    setTooltip(prev => ({ ...prev, visible: false }));
-  };
 
   useEffect(() => {
     planet = planetsConfig[name]
@@ -67,19 +76,8 @@ const SolarSystemPage2 = () => {
       // Calculate objects intersecting the picking ray. Assume 'planetSphere' is the mesh you want to check.
       const intersects = raycaster.intersectObjects([planetSphere]);
   
-      if (intersects.length > 0) {
-        setTooltip({
-          visible: true,
-          content: `Planet: ${planet.name} - Clicked!
-          
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?`
-        });
-      } else {
-        setTooltip({
-          visible: false,
-          content: ""
-        });
-      }
+      
+      
     };
   
     window.addEventListener('click', onClick);
@@ -99,7 +97,7 @@ const SolarSystemPage2 = () => {
 
     // Add the Planet
     const planetRadius = 3;
-    const planetSphere = getPlanet(planetRadius, planet.texture);
+    const planetSphere = getPlanet(planetRadius, planet.texture, hasAtmosphere);
     
     scene.add(planetSphere);
 
@@ -248,42 +246,73 @@ const SolarSystemPage2 = () => {
 
   return (
     <div ref={mountRef} style={{ width: "100%", height: "100vh" }}>
-      {tooltip.visible && (
-       <div style={{
-        width: '30%',
-    height: '80%',
-    paddingTop: '4em',
-    position: 'absolute',
-    left: '30px',
-    top: '30px',
-    background: 'linear-gradient(to right, #232526, #414345)', /* Subtle dark gradient for a high-tech feel */
-    color: 'rgba(255, 255, 255, 0.9)', /* Light text color for contrast */
-    padding: '10px',
-    margin: '10px',
-    border: '1px solid rgba(255, 255, 255, 0.2)', /* Sleek, subtle border */
-    borderRadius: '8px',
-    boxShadow: '0 4px 8px rgba(0, 255, 255, 0.3)', /* Futuristic cyan glow for depth */
-    fontFamily: 'Orbitron, sans-serif', /* Futuristic font */
-    textShadow: '0 0 8px cyan', /* Cyan text glow for a digital look */
-    overflow: 'hidden' /* Ensures content fits well within the borders */
-    }}>
-          {tooltip.content}
-          <button onClick={handleCloseTooltip} style={{
-            position: 'absolute',
-            top: '5px',
-            right: '5px',
-            border: 'none',
-            background: 'transparent',
-            color: '#FFFFFF',
-            fontSize: '20px',
-            cursor: 'pointer',
-            textShadow: '0 0 8px red'
-          }}>X</button>
-        </div>
-      )}
         
-        <button onClick={() => setModalOpen(true)}>Start Quiz</button>
-      {planetName && <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} children={<Quiz planet={planetName} />} />}
+        <button onClick={() => setLearnModalOpen(true)} style={{
+        position: 'absolute',
+        left: '150px',
+        margin: '10px',
+        padding: '10px 20px',
+        background: 'linear-gradient(145deg,  #1f77fe,  #0808af )',
+        color: 'white',
+        fontSize: '16px',
+        borderRadius: '3px',
+        border: 'none',
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+        transition: 'all 0.3s ease-in-out'
+      }}
+      onMouseOver={e => {
+        e.target.style.transform = 'scale(1.05)';
+      }}
+      onMouseOut={e => {
+        e.target.style.transform = 'scale(1)';
+      }}>Start Learning</button>
+        <button onClick={() => setQuizModalOpen(true)} style={{
+        position: 'absolute',
+        left: '350px',
+        margin: '10px',
+        padding: '10px 20px',
+        background: 'linear-gradient(145deg,  #1f77fe,  #0808af )',
+        color: 'white',
+        fontSize: '16px',
+        borderRadius: '3px',
+        border: 'none',
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+        transition: 'all 0.3s ease-in-out'
+      }}
+      onMouseOver={e => {
+        e.target.style.transform = 'scale(1.05)';
+      }}
+      onMouseOut={e => {
+        e.target.style.transform = 'scale(1)';
+      }}>Start Quiz</button>
+       <button onClick={() => setChatOpen(true)} style={{
+        position: 'absolute',
+        left: '550px',
+        margin: '10px',
+        padding: '10px 20px',
+        background: 'linear-gradient(145deg,  #1f77fe,  #0808af )',
+        color: 'white',
+        fontSize: '16px',
+        borderRadius: '3px',
+        border: 'none',
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+        transition: 'all 0.3s ease-in-out'
+      }}
+      onMouseOver={e => {
+        e.target.style.transform = 'scale(1.05)';
+      }}
+      onMouseOut={e => {
+        e.target.style.transform = 'scale(1)';
+      }}>Start Chat</button>
+      {learnModalOpen && <Modal isOpen={learnModalOpen} onClose={() => setLearnModalOpen(false)} children={<Learn planet={planetName} />} />}
+      {quizModalOpen && <Modal isOpen={quizModalOpen} onClose={() => setQuizModalOpen(false)} children={<Quiz planet={planetName} />} />}
+      {chatOpen && <Modal isOpen={chatOpen} onClose={() => setChatOpen(false)} children={<Chat planet={planetName} />} />}
       
     </div>
   );
@@ -314,7 +343,7 @@ function getRandomNumber(minVal, maxVal) {
   return randomInRange;
 }
 
-function getPlanet(radius, texture) {
+function getPlanet(radius, texture, hasAtmosphere=false) {
   // Texture and Geometry
   const loader = new THREE.TextureLoader();
   const geometry = new THREE.SphereGeometry(radius, 32, 32);
@@ -322,7 +351,19 @@ function getPlanet(radius, texture) {
     map: loader.load("../../textures/" + texture),
   });
   const sphere = new THREE.Mesh(geometry, material);
-
+  if(hasAtmosphere){
+    const atmosphereMaterial = new THREE.MeshBasicMaterial({
+      color: 0x0000ff,
+      transparent: true,
+      opacity: 0.2,
+      blending: THREE.AdditiveBlending,
+      side: THREE.DoubleSide
+    });
+  
+    const atmosphereGeometry = new THREE.SphereGeometry(radius * 1.1, 32, 32);
+    const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+    sphere.add(atmosphere);
+  }
   return sphere;
 }
 

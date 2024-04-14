@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from openai import OpenAI
 from dotenv import load_dotenv
@@ -25,13 +25,20 @@ planets = [
 ]
 
 
-@app.route('/api/planets', methods=['GET'])
+@app.route('/api/chat', methods=['GET','POST'])
 def get_planets():
+    print("In")
+    data =  request.get_json()
+    print(data)
+    question = data.get('question')  # Default question if none provided
+    print(question)
+    planet = data.get('planet')  # Default question if none provided
+    
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "You are a helpful teacher speaking to children teaching them about the solar system."},
-            {"role": "user", "content": "Is the moon a planet?"}
+            {"role": "system", "content": f"You are a helpful teacher speaking to children teaching them about the solar system and specifically about {planet}."},
+            {"role": "user", "content": question}
         ]
     )
     completion_text = completion.choices[0].message.content
