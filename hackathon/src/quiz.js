@@ -1,66 +1,71 @@
 import { useEffect, useState } from "react";
-import importedQuestions from "./questions.json"; // Rename to avoid shadowing
-import './QuizStyles.css'; // Adjust the path as necessary
+import importedQuestions from "./questions.json"; // Ensure the path to questions.json is correct
+import './QuizStyles.css'; // Ensure the path to QuizStyles.css is correct
 
 export const Quiz = ({ planet }) => {
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [showQuestionContainer, setShowQuestionContainer] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(null);
-  const [feedbackText, setFeedbackText] = useState('');
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showFeedback, setShowFeedback] = useState(false);
-  const [showNextButton, setShowNextButton] = useState(false);
+  const [feedbackText, setFeedbackText] = useState('');
   const [showStartButton, setShowStartButton] = useState(true);
-  
+  const [quizCompleted, setQuizCompleted] = useState(false);
+
   useEffect(() => {
     if (planet) {
-      setQuestions(importedQuestions[planet].sort(() => Math.random() - 0.5));
+      const shuffledQuestions = [...importedQuestions[planet]].sort(() => Math.random() - 0.5);
+      setQuestions(shuffledQuestions);
+      setCurrentQuestion(shuffledQuestions[0]); // Pre-load the first question
     }
-  }, []);
+  }, [planet]);
 
-  useEffect(() => {
-    console.log(questions)
-  }, [questions]);
-
-  function startGame() {
+  const startGame = () => {
+    setQuizCompleted(false);
     setShowStartButton(false);
-    setShowQuestionContainer(true);
     setCurrentQuestionIndex(0);
-    setNextQuestion();
-  }
+    setCurrentQuestion(questions[0]);
+    setSelectedAnswer(null);
+  };
 
-  function setNextQuestion() {
-    setCurrentQuestion(questions[currentQuestionIndex]);
-  }
-
-  function selectAnswer(answer) {
-    const correct = answer.correct;
-    setFeedbackText(correct ? currentQuestion.correctFeedback : currentQuestion.incorrectFeedback);
+  const handleAnswer = (answer) => {
+    setSelectedAnswer(answer);
     setShowFeedback(true);
+    setFeedbackText(answer.correct ? currentQuestion.feedback.correct : currentQuestion.feedback.incorrect);
 
-    if (correct) {
-      if (questions.length > currentQuestionIndex + 1) {
-        setShowNextButton(true);
+    setTimeout(() => {
+      setShowFeedback(false);
+      if (answer.correct) {
+        const nextQuestionIndex = currentQuestionIndex + 1;
+        if (nextQuestionIndex < questions.length) {
+          setCurrentQuestionIndex(nextQuestionIndex);
+          setCurrentQuestion(questions[nextQuestionIndex]);
+          setSelectedAnswer(null);
+        } else {
+          setQuizCompleted(true);
+          setShowStartButton(true);
+        }
       } else {
-        setShowStartButton(true);
+        // Clear selected answer to allow retry
+        setSelectedAnswer(null);
       }
-    } else {
-      setTimeout(() => {
-        setFeedbackText('');
-        setShowFeedback(false);
-        setCurrentQuestion(questions[currentQuestionIndex]); // Allow retry for the same question
-      }, 2000); // Show incorrect feedback for 2 seconds before retry
-    }
-  }
+    }, 2000); // Delay before clearing feedback or moving to the next question
+  };
 
   return (
     <div className="container">
-      {showQuestionContainer && (
-        <div id="question-container">
-          <div id="question">{currentQuestion?.question}</div>
-          <div id="answer-buttons">
-            {currentQuestion?.answers.map((answer, index) => (
-              <button key={index} className="btn" onClick={() => selectAnswer(answer)}>
+      {showStartButton && !quizCompleted && (
+        <button className="start-btn btn" onClick={startGame}>Start Quiz</button>
+      )}
+      {!showStartButton && currentQuestion && !quizCompleted && (
+        <div>
+          <div id="question">{currentQuestion.question}</div>
+          <div id="answer-buttons" className="btn-grid">
+            {currentQuestion.answers.map((answer, index) => (
+              <button key={index}
+                      className={`btn ${selectedAnswer === answer ? (answer.correct ? 'correct' : 'wrong') : ''}`}
+                      onClick={() => handleAnswer(answer)}
+                      disabled={showFeedback}>
                 {answer.text}
               </button>
             ))}
@@ -68,22 +73,12 @@ export const Quiz = ({ planet }) => {
           {showFeedback && <div className="feedback">{feedbackText}</div>}
         </div>
       )}
-      <div className="controls">
-        {showStartButton && (
-          <button id="start-btn" className="start-btn btn" onClick={startGame}>
-            Start
-          </button>
-        )}
-        {showNextButton && (
-          <button id="next-btn" className="next-btn btn" onClick={() => {
-            setCurrentQuestionIndex(currentQuestionIndex + 1);
-            setNextQuestion();
-            setShowNextButton(false);
-          }}>
-            Next
-          </button>
-        )}
-      </div>
+      {quizCompleted && (
+        <div>
+          <div className="feedback">You have successfully completed this quiz!</div>
+          <button className="start-btn btn" onClick={() => setQuizCompleted(false)}>Exit</button>
+        </div>
+      )}
     </div>
   );
 };
