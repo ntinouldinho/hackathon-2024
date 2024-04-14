@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import importedQuestions from "./questions.json";
+import React, { useEffect, useState } from 'react';
+import importedQuestions from './questions.json';
 import './QuizStyles.css';
 
-export const Quiz = ({ planet, onClose }) => {
+export const Quiz = ({ planet }) => {
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(null);
@@ -15,8 +15,7 @@ export const Quiz = ({ planet, onClose }) => {
     if (planet) {
       const shuffledQuestions = [...importedQuestions[planet]].sort(() => Math.random() - 0.5);
       setQuestions(shuffledQuestions);
-      setCurrentQuestionIndex(0);
-      setCurrentQuestion(shuffledQuestions[0]);
+      setCurrentQuestion(shuffledQuestions[0]); // Pre-load the first question
     }
   }, [planet]);
 
@@ -31,19 +30,7 @@ export const Quiz = ({ planet, onClose }) => {
   const handleAnswer = (answer) => {
     setSelectedAnswer(answer);
     setShowFeedback(true);
-
-    // Determine the feedback text based on the answer's correctness and the question's feedback structure
-    let feedbackMessage;
-    if (currentQuestion.feedback) {
-      // Handling feedback structure with nested correct and incorrect keys
-      feedbackMessage = answer.correct ? currentQuestion.feedback.correct : currentQuestion.feedback.incorrect;
-    } else {
-      // Handling separate feedback keys (fallback)
-      feedbackMessage = answer.correct ? currentQuestion.correctFeedback : currentQuestion.incorrectFeedback;
-    }
-
-    // Set feedback text if available, otherwise use a fallback message
-    setFeedbackText(feedbackMessage || "No feedback available.");
+    setFeedbackText(answer.correct ? currentQuestion.feedback.correct : currentQuestion.feedback.incorrect);
 
     setTimeout(() => {
       setShowFeedback(false);
@@ -52,19 +39,24 @@ export const Quiz = ({ planet, onClose }) => {
         if (nextQuestionIndex < questions.length) {
           setCurrentQuestionIndex(nextQuestionIndex);
           setCurrentQuestion(questions[nextQuestionIndex]);
-          setSelectedAnswer(null); // Reset selected answer for the next question
+          setSelectedAnswer(null);
         } else {
-          setQuizCompleted(true); // Set quiz as completed when there are no more questions
+          setQuizCompleted(true);
         }
       } else {
-        setSelectedAnswer(null); // Reset selected answer to allow for retry if the answer was incorrect
+        setSelectedAnswer(null); // Allow retry for the current question
       }
     }, 2000); // Delay for showing feedback
   };
 
   return (
     <div className="container">
-      {!quizCompleted ? (
+      {quizCompleted ? (
+        <div className="quiz-completion">
+          <p>You have successfully completed this quiz!</p>
+          {/* No actions or buttons shown, just the message */}
+        </div>
+      ) : (
         <>
           {currentQuestion && (
             <div>
@@ -74,7 +66,7 @@ export const Quiz = ({ planet, onClose }) => {
                   <button key={index}
                           className={`btn ${selectedAnswer === answer ? (answer.correct ? 'correct' : 'wrong') : ''}`}
                           onClick={() => handleAnswer(answer)}
-                          disabled={showFeedback || selectedAnswer}>
+                          disabled={showFeedback}>
                     {answer.text}
                   </button>
                 ))}
@@ -86,11 +78,6 @@ export const Quiz = ({ planet, onClose }) => {
             <button className="start-btn btn" onClick={startGame}>Start Quiz</button>
           )}
         </>
-      ) : (
-        <div className="quiz-completion">
-          <p>You have successfully completed this quiz!</p>
-          <button className="start-btn btn" onClick={onClose}>Exit</button>
-        </div>
       )}
     </div>
   );
