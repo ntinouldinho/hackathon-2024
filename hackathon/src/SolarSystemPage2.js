@@ -120,7 +120,7 @@ const SolarSystemPage2 = () => {
     const moonShperes = [];
     planet.moons.forEach((moon) => {
       console.log(moon);
-      const radi = (moon.radius / planet.radius) * 30;
+      // const radi = (moon.radius / planet.radius) * 30;
 
       console.log(moon.texture);
       const moonSphere = getPlanet(0.3, moon.texture);
@@ -136,7 +136,7 @@ const SolarSystemPage2 = () => {
 
       bodies.push({
         position: moonSphere.position,
-        radius: radi
+        radius: 0.3
       });
     });
 
@@ -164,7 +164,7 @@ const SolarSystemPage2 = () => {
     }
 
     const gridSize = 200;
-    const gridStep = 2;
+    const gridStep = 0.5;
     const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0088bb });
     const verticalPos = 0;
 
@@ -175,14 +175,12 @@ const SolarSystemPage2 = () => {
           const dz = z - body.position.z;
           const distance = Math.sqrt(dx * dx + dz * dz);
           // const sigma = 10;
-          const G = 20;
-          const gravityEffect = -G * (body.radius / (distance/2));
+          const G = 5;
+          const gravityEffect = -G * (body.radius / (distance));
           // const gravityEffect = -10 * (body.radius / distance)*distance;
-          return acc + gravityEffect;
+          return acc + gravityEffect*Math.sqrt(distance);
         }, 0);
       }
-
-      
   
       // Create grid lines influenced by gravitational fields of both bodies
       for (let x = -gridSize; x <= gridSize; x += gridStep) {
@@ -257,7 +255,7 @@ const SolarSystemPage2 = () => {
         
         <button onClick={() => setLearnModalOpen(true)} style={{
         position: 'absolute',
-        left: '150px',
+        left: '140px',
         margin: '10px',
         padding: '10px 20px',
         background: 'linear-gradient(145deg,  #1f77fe,  #0808af )',
@@ -278,7 +276,7 @@ const SolarSystemPage2 = () => {
       }}>Start Learning</button>
         <button onClick={() => setQuizModalOpen(true)} style={{
         position: 'absolute',
-        left: '350px',
+        left: '340px',
         margin: '10px',
         padding: '10px 20px',
         background: 'linear-gradient(145deg,  #1f77fe,  #0808af )',
@@ -299,7 +297,7 @@ const SolarSystemPage2 = () => {
       }}>Start Quiz</button>
        <button onClick={() => setAnimationOpen(true)} style={{
         position: 'absolute',
-        left: '510px',
+        left: '500px',
         margin: '10px',
         padding: '10px 20px',
         background: 'linear-gradient(145deg,  #1f77fe,  #0808af )',
@@ -317,7 +315,7 @@ const SolarSystemPage2 = () => {
       }}
       onMouseOut={e => {
         e.target.style.transform = 'scale(1)';
-      }}>Start Animation</button>
+      }}>Visualize Gravity</button>
       <button onClick={() => setChatOpen(true)} style={{
         position: 'absolute',
         right: '0',
