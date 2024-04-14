@@ -30,7 +30,7 @@ export const Quiz = ({ planet }) => {
   const handleAnswer = (answer) => {
     setSelectedAnswer(answer);
     setShowFeedback(true);
-    setFeedbackText(answer.correct ? currentQuestion.feedback.correct : currentQuestion.feedback.incorrect);
+    setFeedbackText(answer.correct ? currentQuestion.correctFeedback : currentQuestion.incorrectFeedback);
 
     setTimeout(() => {
       setShowFeedback(false);
