@@ -7,13 +7,16 @@ import planetsConfig from "./planets.json";
 import { useParams } from 'react-router-dom';
 import { Quiz } from "./quiz";
 import {Modal} from "./Modal"
+import { Learn } from "./learn";
+// import 'bootstrap/dist/css/bootstrap.css';
 
 const SolarSystemPage2 = () => {
   const mountRef = useRef(null);
   const mouse = new THREE.Vector2();
   const raycaster = new THREE.Raycaster();
   const [tooltip, setTooltip] = useState({ visible: false, content: "" });
-  const [modalOpen, setModalOpen] = useState(false);
+  const [quizModalOpen, setQuizModalOpen] = useState(false);
+  const [learnModalOpen, setLearnModalOpen] = useState(false);
   let { name } = useParams(); 
   const [planetName, setPlanetName] = useState(name)
   const planetsWithAtmosphere = ["Earth"]
@@ -286,8 +289,10 @@ const SolarSystemPage2 = () => {
         </div>
       )}
         
-        <button onClick={() => setModalOpen(true)}>Start Quiz</button>
-      {planetName && <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} children={<Quiz planet={planetName} />} />}
+        <button onClick={() => setLearnModalOpen(true)}>Start Learning</button>
+        <button onClick={() => setQuizModalOpen(true)}>Start Quiz</button>
+      {planetName && <Modal isOpen={learnModalOpen} onClose={() => setLearnModalOpen(false)} children={<Learn planet={planetName} />} />}
+      {planetName && <Modal isOpen={quizModalOpen} onClose={() => setQuizModalOpen(false)} children={<Quiz planet={planetName} />} />}
       
     </div>
   );
