@@ -170,7 +170,7 @@ const SolarSystem = () => {
         });
 
         mercurySystem.rotation.y += EARTH_YEAR * 4;
-        venusSystem.rotation.y -= EARTH_YEAR * 2;
+        venusSystem.rotation.y += EARTH_YEAR * 2;
         earthSystem.rotation.y += EARTH_YEAR;
         marsSystem.rotation.y += EARTH_YEAR * 0.5;
         jupiterSystem.rotation.y += EARTH_YEAR * 2.5;
