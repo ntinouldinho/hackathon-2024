@@ -241,8 +241,48 @@ const SolarSystemPage2 = () => {
   return (
     <div ref={mountRef} style={{ width: "100%", height: "100vh" }}>
         
-        <button onClick={() => setLearnModalOpen(true)}>Start Learning</button>
-        <button onClick={() => setQuizModalOpen(true)}>Start Quiz</button>
+        <button onClick={() => setLearnModalOpen(true)} style={{
+        position: 'absolute',
+        left: '150px',
+        margin: '10px',
+        padding: '10px 20px',
+        background: 'linear-gradient(145deg,  #1f77fe,  #0808af )',
+        color: 'white',
+        fontSize: '16px',
+        borderRadius: '3px',
+        border: 'none',
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+        transition: 'all 0.3s ease-in-out'
+      }}
+      onMouseOver={e => {
+        e.target.style.transform = 'scale(1.05)';
+      }}
+      onMouseOut={e => {
+        e.target.style.transform = 'scale(1)';
+      }}>Start Learning</button>
+        <button onClick={() => setQuizModalOpen(true)} style={{
+        position: 'absolute',
+        left: '350px',
+        margin: '10px',
+        padding: '10px 20px',
+        background: 'linear-gradient(145deg,  #1f77fe,  #0808af )',
+        color: 'white',
+        fontSize: '16px',
+        borderRadius: '3px',
+        border: 'none',
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+        transition: 'all 0.3s ease-in-out'
+      }}
+      onMouseOver={e => {
+        e.target.style.transform = 'scale(1.05)';
+      }}
+      onMouseOut={e => {
+        e.target.style.transform = 'scale(1)';
+      }}>Start Quiz</button>
       {planetName && <Modal isOpen={learnModalOpen} onClose={() => setLearnModalOpen(false)} children={<Learn planet={planetName} />} />}
       {planetName && <Modal isOpen={quizModalOpen} onClose={() => setQuizModalOpen(false)} children={<Quiz planet={planetName} />} />}
       
