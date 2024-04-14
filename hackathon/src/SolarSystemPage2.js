@@ -97,7 +97,7 @@ const SolarSystemPage2 = () => {
     const sunGeometry = new THREE.SphereGeometry(sunRadius, 32, 32); // Adjust size as needed
     const sunMaterial = new THREE.MeshBasicMaterial({
       color: 0xffff00,
-      map: loader.load("textures/sun.jpeg"),
+      map: loader.load("../../textures/sun.jpeg"),
     }); // Yellow color for the sun
 
     const sun = new THREE.Mesh(sunGeometry, sunMaterial);
@@ -314,7 +314,7 @@ function getPlanet(radius, texture) {
   const loader = new THREE.TextureLoader();
   const geometry = new THREE.SphereGeometry(radius, 32, 32);
   const material = new THREE.MeshPhongMaterial({
-    map: loader.load("textures/" + texture),
+    map: loader.load("../../textures/" + texture),
   });
   const sphere = new THREE.Mesh(geometry, material);
 
@@ -328,7 +328,7 @@ function getRings(texture, tube) {
   const loader = new THREE.TextureLoader();
   const ringGeometry = new THREE.TorusGeometry(4, tube, 2.5, 100);
   const ringMaterial = new THREE.MeshPhongMaterial({
-    map: loader.load("textures/" + texture),
+    map: loader.load("../../textures/" + texture),
     side: THREE.DoubleSide,
   });
   const rings = new THREE.Mesh(ringGeometry, ringMaterial);
