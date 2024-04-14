@@ -1,135 +1,60 @@
-// import React, { useState, useEffect } from "react";
-// import axios from "axios";
-// import planetsConfig from "./planets.json";
-// import SolarSystemPage2 from "./SolarSystemPage2";
-// // import SolarSystem from "./SolarSystem";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, useNavigate, useLocation } from 'react-router-dom';
+import SolarSystem from './SolarSystem';
+import SolarSystemPage2 from './SolarSystemPage2';
 
-// // const planets = [
-// //   { name: "Moon", texture: "textures/moon_1024.jpg" },
-// //   { name: "Mercury", texture: "textures/mercury.jpeg" },
-// //   { name: "Venus", texture: "textures/venus.jpeg" },
-// //   { name: "Earth", texture: "textures/earth.jpeg" },
-// //   { name: "Mars", texture: "textures/mars.jpeg" },
-// //   { name: "Jupiter", texture: "textures/jupiter.jpeg" },
-// //   { name: "Saturn", texture: "textures/saturn.jpeg" },
-// //   { name: "Uranus", texture: "textures/uranus.jpeg" },
-// //   { name: "Neptune", texture: "textures/neptune.jpeg" },
-// //   { name: "Pluto", texture: "textures/pluto.jpg" },
-// // ];
-
-// const planets = [
-//   "Earth",
-//   "Neptune",
-//   "Mercury",
-//   "Venus",
-//   "Mars",
-//   "Jupiter",
-//   "Saturn",
-//   "Uranus",
-//   "Pluto",
-// ];
-
-// const App = () => {
-//   console.log(planetsConfig);
-//   const [currentPlanet, setCurrentPlanet] = useState({
-//     radius: 24764,
-//     texture: "earth.jpeg",
-//     ring: "",
-//     moons: [
-//       {
-//         name: "Moon",
-//         radius: 1737,
-//         texture: "moon_1024.jpg",
-//       },
-//     ],
-//   });
-
-//   // const [planetName, setPlanetName] = useState("Earth");
-
-//   return (
-//     <>
-//       <div>
-//         {/* <h1>Planetary Viewer</h1> */}
-//         {planets.map((planet) => (
-//           <button
-//             key={planet}
-//             onClick={() => {
-//               setCurrentPlanet(planetsConfig[planet]);
-//             }}
-//           >
-//             {planet}
-//           </button>
-//         ))}
-//         {/* <SolarSystem /> */}
-//         <SolarSystemPage2 planet={currentPlanet} />
-//       </div>
-//     </>
-//   );
-// };
-
-// export default App;
-
-import * as THREE from "three";
-import { useEffect, useState, useRef } from "react";
-import SceneInit from "./lib/SceneInit";
-import Planet from "./lib/Planet";
-import Rotation from "./lib/Rotation";
-import SolarSystemPage2 from "./SolarSystemPage2";
-import planetsConfig from "./planets.json";
-import SolarSystem from "./SolarSystem";
-
-import { BrowserRouter as Router, Route, Routes, Switch } from 'react-router-dom';
 export default function App() {
-  
-
   return (
-//     <>
-//       <div style={{
-//     alignItems: 'center',
-//     justifyContent: 'space-around',
-//     height: '100vh',
-//     background: 'linear-gradient(to bottom, #0f2027, #203a43, #2c5364)', /* Deep space inspired gradient */
-//     color: '#FFFFFF',
-//     fontFamily: 'Orbitron, sans-serif',
-//     textAlign: 'center'
-// }}>
-//     {/* The commented out header can be styled and used if uncommented */}
-//     {/* <h1 style={{ color: '#00BFFF', textShadow: '0 0 10px #00BFFF' }}>Planetary Viewer</h1> */}
-//     {planets.map((planet) => (
-//         <button
-//             key={planet}
-//             onClick={() => {
-//                 setCurrentPlanet(planetsConfig[planet]);
-//             }}
-//             style={{
-//               margin: '15px 10px',
-//               padding: '5px 10px',
-//                 border: 'none',
-//                 borderRadius: '5px',
-//                 background: 'rgba(0, 191, 255, 0.6)',
-//                 boxShadow: '0 0 10px #00BFFF',
-//                 color: 'white',
-//                 textShadow: '0 0 5px cyan',
-//                 cursor: 'pointer',
-//             }}
-//         >
-//             {planet}
-//         </button>
-//     ))}
-//     {/* SolarSystemPage2 is left unstyled as requested */}
-//     <SolarSystemPage2 planet={currentPlanet} />
-// </div>
-
-//     </>
-//   );
-// };
     <Router>
+      <div>
+        <BackButton />
+        
         <Routes>
           <Route path="/" element={<SolarSystem />} />
-
           <Route path="/planet/:name" element={<SolarSystemPage2 />} />
         </Routes>
+      </div>
     </Router>
-    
+  );
+}
+
+function BackButton() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Function to navigate back
+  const goBack = () => {
+    navigate(-1); // Moves one step back in the history stack
+  };
+
+  if (location.pathname === '/') {
+    return null; // Do not render anything if it's the home page
+  }
+
+  return (
+    <button onClick={goBack}
+      style={{
+        position: 'absolute',
+        margin: '10px',
+        padding: '10px 20px',
+        background: 'linear-gradient(145deg,  #1f77fe,  #0808af )',
+        color: 'white',
+        fontSize: '16px',
+        borderRadius: '3px',
+        border: 'none',
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+        transition: 'all 0.3s ease-in-out'
+      }}
+      onMouseOver={e => {
+        e.target.style.transform = 'scale(1.05)';
+      }}
+      onMouseOut={e => {
+        e.target.style.transform = 'scale(1)';
+      }}
+    >
+      Go Back
+    </button>
   );
 }
