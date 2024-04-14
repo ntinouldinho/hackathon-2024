@@ -5,13 +5,17 @@ import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import planetsConfig from "./planets.json";
 import { useParams } from 'react-router-dom';
+import { Quiz } from "./quiz";
+import {Modal} from "./Modal"
 
 const SolarSystemPage2 = () => {
   const mountRef = useRef(null);
   const mouse = new THREE.Vector2();
   const raycaster = new THREE.Raycaster();
   const [tooltip, setTooltip] = useState({ visible: false, content: "" });
+  const [modalOpen, setModalOpen] = useState(false);
   let { name } = useParams(); 
+  const [planetName, setPlanetName] = useState(name)
   let planet;
 
   useEffect(() => {
@@ -253,6 +257,8 @@ const SolarSystemPage2 = () => {
     };
   }, []);
 
+
+
   return (
     <div ref={mountRef} style={{ width: "100%", height: "100vh" }}>
       {tooltip.visible && (
@@ -276,6 +282,10 @@ const SolarSystemPage2 = () => {
           {tooltip.content}
         </div>
       )}
+        
+        <button onClick={() => setModalOpen(true)}>Start Quiz</button>
+      {planetName && <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} children={<Quiz planet={planetName} />} />}
+      
     </div>
   );
   
