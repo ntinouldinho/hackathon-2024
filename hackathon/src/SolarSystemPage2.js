@@ -289,8 +289,30 @@ const SolarSystemPage2 = () => {
       onMouseOut={e => {
         e.target.style.transform = 'scale(1)';
       }}>Start Quiz</button>
-      {planetName && <Modal isOpen={learnModalOpen} onClose={() => setLearnModalOpen(false)} children={<Learn planet={planetName} />} />}
-      {planetName && <Modal isOpen={quizModalOpen} onClose={() => setQuizModalOpen(false)} children={<Quiz planet={planetName} />} />}
+       <button onClick={() => setChatOpen(true)} style={{
+        position: 'absolute',
+        left: '550px',
+        margin: '10px',
+        padding: '10px 20px',
+        background: 'linear-gradient(145deg,  #1f77fe,  #0808af )',
+        color: 'white',
+        fontSize: '16px',
+        borderRadius: '3px',
+        border: 'none',
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+        transition: 'all 0.3s ease-in-out'
+      }}
+      onMouseOver={e => {
+        e.target.style.transform = 'scale(1.05)';
+      }}
+      onMouseOut={e => {
+        e.target.style.transform = 'scale(1)';
+      }}>Start Chat</button>
+      {learnModalOpen && <Modal isOpen={learnModalOpen} onClose={() => setLearnModalOpen(false)} children={<Learn planet={planetName} />} />}
+      {quizModalOpen && <Modal isOpen={quizModalOpen} onClose={() => setQuizModalOpen(false)} children={<Quiz planet={planetName} />} />}
+      {chatOpen && <Modal isOpen={chatOpen} onClose={() => setChatOpen(false)} children={<Chat planet={planetName} />} />}
       
     </div>
   );
