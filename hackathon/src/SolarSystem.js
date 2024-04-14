@@ -51,7 +51,7 @@ const SolarSystem = () => {
       let venusSystem = new THREE.Group();
       venusSystem.add(venusMesh);
 
-      const earth = new Planet(4, 40, "textures/earth.jpeg", "Earth");
+      const earth = new Planet(4, 40, "textures/earth.jpg", "Earth");
       const earthMesh = earth.getMesh();
       let earthSystem = new THREE.Group();
       earthSystem.add(earthMesh);
@@ -95,7 +95,7 @@ const SolarSystem = () => {
       const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffcc });
       const stars = [];
 
-      for (let i = 0; i < 1000; i++) {
+      for (let i = 0; i < 500; i++) {
         const star = new THREE.Mesh(starGeometry, starMaterial);
         const [x, y, z] = Array(3)
           .fill()
