@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import importedQuestions from "./questions.json"; // Ensure the path to questions.json is correct
-import './QuizStyles.css'; // Ensure the path to QuizStyles.css is correct
+import React, { useEffect, useState } from 'react';
+import importedQuestions from './questions.json';
+import './QuizStyles.css';
 
 export const Quiz = ({ planet }) => {
   const [questions, setQuestions] = useState([]);
@@ -9,7 +9,6 @@ export const Quiz = ({ planet }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedbackText, setFeedbackText] = useState('');
-  const [showStartButton, setShowStartButton] = useState(true);
   const [quizCompleted, setQuizCompleted] = useState(false);
 
   useEffect(() => {
@@ -22,10 +21,10 @@ export const Quiz = ({ planet }) => {
 
   const startGame = () => {
     setQuizCompleted(false);
-    setShowStartButton(false);
     setCurrentQuestionIndex(0);
     setCurrentQuestion(questions[0]);
     setSelectedAnswer(null);
+    setShowFeedback(false);
   };
 
   const handleAnswer = (answer) => {
@@ -43,41 +42,42 @@ export const Quiz = ({ planet }) => {
           setSelectedAnswer(null);
         } else {
           setQuizCompleted(true);
-          setShowStartButton(true);
         }
       } else {
-        // Clear selected answer to allow retry
-        setSelectedAnswer(null);
+        setSelectedAnswer(null); // Allow retry for the current question
       }
-    }, 2000); // Delay before clearing feedback or moving to the next question
+    }, 2000); // Delay for showing feedback
   };
 
   return (
     <div className="container">
-      {showStartButton && !quizCompleted && (
-        <button className="start-btn btn" onClick={startGame}>Start Quiz</button>
-      )}
-      {!showStartButton && currentQuestion && !quizCompleted && (
-        <div>
-          <div id="question">{currentQuestion.question}</div>
-          <div id="answer-buttons" className="btn-grid">
-            {currentQuestion.answers.map((answer, index) => (
-              <button key={index}
-                      className={`btn ${selectedAnswer === answer ? (answer.correct ? 'correct' : 'wrong') : ''}`}
-                      onClick={() => handleAnswer(answer)}
-                      disabled={showFeedback}>
-                {answer.text}
-              </button>
-            ))}
-          </div>
-          {showFeedback && <div className="feedback">{feedbackText}</div>}
+      {quizCompleted ? (
+        <div className="quiz-completion">
+          <p>You have successfully completed this quiz!</p>
+          {/* No actions or buttons shown, just the message */}
         </div>
-      )}
-      {quizCompleted && (
-        <div>
-          <div className="feedback">You have successfully completed this quiz!</div>
-          <button className="start-btn btn" onClick={() => setQuizCompleted(false)}>Exit</button>
-        </div>
+      ) : (
+        <>
+          {currentQuestion && (
+            <div>
+              <div id="question">{currentQuestion.question}</div>
+              <div id="answer-buttons" className="btn-grid">
+                {currentQuestion.answers.map((answer, index) => (
+                  <button key={index}
+                          className={`btn ${selectedAnswer === answer ? (answer.correct ? 'correct' : 'wrong') : ''}`}
+                          onClick={() => handleAnswer(answer)}
+                          disabled={showFeedback}>
+                    {answer.text}
+                  </button>
+                ))}
+              </div>
+              {showFeedback && <div className="feedback">{feedbackText}</div>}
+            </div>
+          )}
+          {!currentQuestion && (
+            <button className="start-btn btn" onClick={startGame}>Start Quiz</button>
+          )}
+        </>
       )}
     </div>
   );

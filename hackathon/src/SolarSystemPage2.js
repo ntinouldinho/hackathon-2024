@@ -9,6 +9,7 @@ import { Quiz } from "./quiz";
 import {Modal} from "./Modal"
 import { Learn } from "./learn";
 import { Chat } from "./chat";
+import { Balls } from "./Balls";
 // import 'bootstrap/dist/css/bootstrap.css';
 
 const SolarSystemPage2 = () => {
@@ -21,6 +22,8 @@ const SolarSystemPage2 = () => {
   const [learnModalOpen, setLearnModalOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
+  const [animationOpen, setAnimationOpen] = useState(false);
+
 
   let { name } = useParams(); 
   const [planetName, setPlanetName] = useState(name)
@@ -289,7 +292,7 @@ const SolarSystemPage2 = () => {
       onMouseOut={e => {
         e.target.style.transform = 'scale(1)';
       }}>Start Quiz</button>
-       <button onClick={() => setChatOpen(true)} style={{
+       <button onClick={() => setAnimationOpen(true)} style={{
         position: 'absolute',
         right: '0',
         margin: '10px',
@@ -313,6 +316,8 @@ const SolarSystemPage2 = () => {
       {learnModalOpen && <Modal isOpen={learnModalOpen} onClose={() => setLearnModalOpen(false)} children={<Learn planet={planetName} />} />}
       {quizModalOpen && <Modal isOpen={quizModalOpen} onClose={() => setQuizModalOpen(false)} children={<Quiz planet={planetName} />} />}
       {chatOpen && <Modal isOpen={chatOpen} onClose={() => setChatOpen(false)} children={<Chat planet={planetName} />} />}
+
+      {animationOpen && <Modal isOpen={animationOpen} onClose={() => setAnimationOpen(false)} children={<Balls planetName={planetName} />} />}
       
     </div>
   );
