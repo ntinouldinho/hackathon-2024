@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3D Spaceship Model with Three.js</title>
+    <style>
+        body { margin: 0; }
+        canvas { width: 100%; height: 100% }
+    </style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/three@0.150.0/build/three.min.js"></script>
+<script>
+    // Scene, camera, and renderer setup
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // Lighting
+    const light = new THREE.PointLight(0xffffff, 1, 100);
+    light.position.set(10, 10, 10);
+    scene.add(light);
+    const ambientLight = new THREE.AmbientLight(0x404040); // soft white light
+    scene.add(ambientLight);
+
+    // Rocket body
+    const bodyGeometry = new THREE.CylinderGeometry(0.5, 0.5, 3, 32);
+    const bodyMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
+    const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+    body.position.set(0, 1.5, 0);
+    scene.add(body);
+
+    // Rocket cone
+    const coneGeometry = new THREE.ConeGeometry(0.5, 1, 32);
+    const coneMaterial = new THREE.MeshLambertMaterial({ color: 0xff0000 });
+    const cone = new THREE.Mesh(coneGeometry, coneMaterial);
+    cone.position.set(0, 3, 0);
+    scene.add(cone);
+
+    // Rocket fins
+    const finGeometry = new THREE.BoxGeometry(0.1, 0.5, 2);
+    const finMaterial = new THREE.MeshLambertMaterial({ color: 0xff0000 });
+    const finRight = new THREE.Mesh(finGeometry, finMaterial);
+    finRight.position.set(-0.6, 0.5, 0);
+    finRight.rotation.z = -0.5 * Math.PI;
+    scene.add(finRight);
+
+    const finLeft = finRight.clone();
+    finLeft.position.x = -finRight.position.x;
+    scene.add(finLeft);
+
+    // Rocket window
+    const windowGeometry = new THREE.CircleGeometry(0.3, 32);
+    const windowMaterial = new THREE.MeshLambertMaterial({ color: 0x0000ff });
+    const shipWindow = new THREE.Mesh(windowGeometry, windowMaterial);
+    shipWindow.position.set(0, 2, 0.51);
+    scene.add(shipWindow);
+
+    // Rocket flames
+    const flameGeometry = new THREE.ConeGeometry(0.5, 1, 32);
+    const flameMaterial = new THREE.MeshBasicMaterial({ color: 0xffa500 });
+    const flame = new THREE.Mesh(flameGeometry, flameMaterial);
+    flame.position.set(0, -0.5, 0);
+    flame.rotation.x = Math.PI;
+    scene.add(flame);
+
+    // Camera position
+    camera.position.z = 8;
+
+    // Animation loop
+    const animate = function () {
+        requestAnimationFrame(animate);
+        body.rotation.y += 0.01;
+        cone.rotation.y += 0.01;
+        shipWindow.rotation.y += 0.01; // Corrected variable name
+        flame.rotation.y += 0.01;
+        renderer.render(scene, camera);
+    };
+
+    animate();
+
+    // Handle window resizing
+    window.addEventListener('resize', onWindowResize, false);
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+</script>
+</body>
+</html>
