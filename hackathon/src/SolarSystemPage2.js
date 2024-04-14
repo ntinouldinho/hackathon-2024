@@ -1,15 +1,22 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 import { FontLoader } from "three/addons/loaders/FontLoader.js";
 import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import planetsConfig from "./planets.json";
+import { useParams } from 'react-router-dom';
 
-const SolarSystemPage2 = ({ planet }) => {
-  console.log(planet);
+const SolarSystemPage2 = () => {
   const mountRef = useRef(null);
+  const mouse = new THREE.Vector2();
+  const raycaster = new THREE.Raycaster();
+  const [tooltip, setTooltip] = useState({ visible: false, content: "" });
+  let { name } = useParams(); 
+  let planet;
 
   useEffect(() => {
-    // Scene Setup
+    planet = planetsConfig[name]
+    
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -19,6 +26,7 @@ const SolarSystemPage2 = ({ planet }) => {
     );
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    
     mountRef.current.appendChild(renderer.domElement);
 
     // Create axes
@@ -41,10 +49,38 @@ const SolarSystemPage2 = ({ planet }) => {
       0x0000ff
     );
 
+    const onClick = (event) => {
+      // Calculate mouse position in normalized device coordinates (-1 to +1) for both components.
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  
+      // Update the picking ray with the camera and mouse position.
+      raycaster.setFromCamera(mouse, camera);
+  
+      // Calculate objects intersecting the picking ray. Assume 'planetSphere' is the mesh you want to check.
+      const intersects = raycaster.intersectObjects([planetSphere]);
+  
+      if (intersects.length > 0) {
+        setTooltip({
+          visible: true,
+          content: `Planet: ${planet.name} - Clicked!
+          
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?`
+        });
+      } else {
+        setTooltip({
+          visible: false,
+          content: ""
+        });
+      }
+    };
+  
+    window.addEventListener('click', onClick);
+
     // Add axes to the scene
-    scene.add(xAxis);
-    scene.add(yAxis);
-    scene.add(zAxis);
+    // scene.add(xAxis);
+    // scene.add(yAxis);
+    // scene.add(zAxis);
 
     // Lighting
     const ambientLight = new THREE.AmbientLight(0xffffff);
@@ -57,21 +93,22 @@ const SolarSystemPage2 = ({ planet }) => {
     // Add the sun
     // Create sun geometry and material
     const loader = new THREE.TextureLoader();
-    const sunGeometry = new THREE.SphereGeometry(10, 32, 32); // Adjust size as needed
+    const sunRadius = 10;
+    const sunGeometry = new THREE.SphereGeometry(sunRadius, 32, 32); // Adjust size as needed
     const sunMaterial = new THREE.MeshBasicMaterial({
       color: 0xffff00,
-      map: loader.load("textures/sun.jpeg"),
+      map: loader.load("../../textures/sun.jpeg"),
     }); // Yellow color for the sun
 
     const sun = new THREE.Mesh(sunGeometry, sunMaterial);
     scene.add(sun);
-    sun.position.set(-60, 40, -80);
+    sun.position.set(-30, 0, -40);
 
     // Add the Planet
-    const planetSphere = getPlanet(3, planet.texture);
-
+    const planetRadius = 3;
+    const planetSphere = getPlanet(planetRadius, planet.texture);
+    
     scene.add(planetSphere);
-    planetSphere.position.set(10, 1, 1);
 
     const rings = getRings(planet.ring, 0.5);
     if (rings) {
@@ -92,7 +129,6 @@ const SolarSystemPage2 = ({ planet }) => {
       const moonSphere = getPlanet(0.3, moon.texture);
 
       scene.add(moonSphere);
-      // moonSphere.position.set(4, 0, 0); // Position the moon next to the planet
       moonSphere.position.set(
         getRandomNumber(1.5, 3),
         getRandomNumber(1.5, 3),
@@ -115,7 +151,7 @@ const SolarSystemPage2 = ({ planet }) => {
     const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffcc });
     const stars = [];
 
-    for (let i = 0; i < 3000; i++) {
+    for (let i = 0; i < 1000; i++) {
       const star = new THREE.Mesh(starGeometry, starMaterial);
       const [x, y, z] = Array(3)
         .fill()
@@ -125,9 +161,52 @@ const SolarSystemPage2 = ({ planet }) => {
       stars.push(star);
     }
 
+    const gridSize = 200;
+    const gridStep = 2;
+    const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff });
+    const verticalPos = 0;
+
+      // Gravitational field calculation incorporating body size
+    function calculateGravitationalCurve(x, z, bodies) {
+        return bodies.reduce((acc, body) => {
+          const dx = x - body.position.x;
+          const dz = z - body.position.z;
+          const distance = Math.sqrt(dx * dx + dz * dz);
+          // const sigma = 10;
+          const G = 20;
+          const gravityEffect = -G * (body.radius / (distance/2));
+          // const gravityEffect = -10 * (body.radius / distance)*distance;
+          return acc + gravityEffect;
+        }, 0);
+      }
+  
+      // Define bodies with their positions and radii
+      const bodies = [
+        { position: planetSphere.position, radius: planetRadius },
+        { position: sun.position, radius: sunRadius }
+      ];
+  
+      // Create grid lines influenced by gravitational fields of both bodies
+      for (let x = -gridSize; x <= gridSize; x += gridStep) {
+        const pointsH = [];
+        const pointsV = [];
+        for (let z = -gridSize; z <= gridSize; z += gridStep) {
+          const curveDepthH = calculateGravitationalCurve(x, z, bodies);
+          const curveDepthV = calculateGravitationalCurve(z, x, bodies);
+          pointsH.push(new THREE.Vector3(x, verticalPos + curveDepthH, z));
+          pointsV.push(new THREE.Vector3(z, verticalPos + curveDepthV, x));
+        }
+        const geometryH = new THREE.BufferGeometry().setFromPoints(pointsH);
+        const lineH = new THREE.Line(geometryH, lineMaterial);
+        scene.add(lineH);
+  
+        const geometryV = new THREE.BufferGeometry().setFromPoints(pointsV);
+        const lineV = new THREE.Line(geometryV, lineMaterial);
+        scene.add(lineV);
+      }
+
     camera.position.z = 10;
-    // camera.position.x = 10;
-    // camera.position.y = 20;
+    // camera.position.set(10, 10, 10);
 
     // camera.lookAt(moon.position);
 
@@ -157,10 +236,9 @@ const SolarSystemPage2 = ({ planet }) => {
       controls.enablePan = true; // Enable panning
       controls.enableRotate = true; // Enable orbiting
 
-      // particleSystem.rotation.x += 0.001;
-      // particleSystem.rotation.y += 0.001;
-
       if (rings) rings.rotation.z += 0.001;
+
+      camera.rotateY += 0.1
 
       renderer.render(scene, camera);
     };
@@ -170,10 +248,37 @@ const SolarSystemPage2 = ({ planet }) => {
     // Cleanup
     return () => {
       mountRef.current.removeChild(renderer.domElement);
+      window.removeEventListener('click', onClick);
+      // mountRef.current.removeChild(renderer.domElement);
     };
-  }, [planet]);
+  }, []);
 
-  return <div ref={mountRef} style={{ width: "100%", height: "100vh" }} />;
+  return (
+    <div ref={mountRef} style={{ width: "100%", height: "100vh" }}>
+      {tooltip.visible && (
+       <div style={{
+        width: '30%',
+    height: '80%',
+    position: 'absolute',
+    left: '30px',
+    top: '30px',
+    background: 'linear-gradient(to right, #232526, #414345)', /* Subtle dark gradient for a high-tech feel */
+    color: 'rgba(255, 255, 255, 0.9)', /* Light text color for contrast */
+    padding: '10px',
+    margin: '10px',
+    border: '1px solid rgba(255, 255, 255, 0.2)', /* Sleek, subtle border */
+    borderRadius: '8px',
+    boxShadow: '0 4px 8px rgba(0, 255, 255, 0.3)', /* Futuristic cyan glow for depth */
+    fontFamily: 'Orbitron, sans-serif', /* Futuristic font */
+    textShadow: '0 0 8px cyan', /* Cyan text glow for a digital look */
+    overflow: 'hidden' /* Ensures content fits well within the borders */
+    }}>
+          {tooltip.content}
+        </div>
+      )}
+    </div>
+  );
+  
 };
 
 // Generate a random number between -4 and -2 or between 2 and 4
@@ -205,7 +310,7 @@ function getPlanet(radius, texture) {
   const loader = new THREE.TextureLoader();
   const geometry = new THREE.SphereGeometry(radius, 32, 32);
   const material = new THREE.MeshPhongMaterial({
-    map: loader.load("textures/" + texture),
+    map: loader.load("../../textures/" + texture),
   });
   const sphere = new THREE.Mesh(geometry, material);
 
@@ -219,7 +324,7 @@ function getRings(texture, tube) {
   const loader = new THREE.TextureLoader();
   const ringGeometry = new THREE.TorusGeometry(4, tube, 2.5, 100);
   const ringMaterial = new THREE.MeshPhongMaterial({
-    map: loader.load("textures/" + texture),
+    map: loader.load("../../textures/" + texture),
     side: THREE.DoubleSide,
   });
   const rings = new THREE.Mesh(ringGeometry, ringMaterial);
