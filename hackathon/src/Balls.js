@@ -117,6 +117,18 @@ export const Balls = ({planetName}) => {
         };
     }, []); // Effect depends on planetGravity
 
-    return  <div><div ref={mountRef} style={{ width: '100%', height: '100%' }}></div></div>
+    return  <div class="container" style={{display:'flex', flexDirection:'row'}}><div ref={mountRef} style={{ width: '100%', height: '100%'}}></div>
+    <div style={{padding:'10px'}}>
+  <p>Imagine the universe is like a huge playground with an enormous, stretchy floor mat, kind of like a bouncy castle's bottom. Now, every planet is like a different-sized play ball that we put on this mat.</p>
+
+  <p>Mercury is like a small tennis ball. It's not very heavy, so it only makes a tiny dip in the mat. Venus is like a heavy medicine ball; it's about the same size as Earth, but it makes a deeper dip because it's really dense. Earth is like a soccer ball. It's just the right size to make a perfect dent to keep us and our moon company without letting us fall off the mat.</p>
+
+  <p>Mars is like a lighter soccer ball. It's smaller and not as heavy as Earth, so the dip it makes is not as deep. Jupiter, though, is like a giant beach ball that's super heavy. It's so big and heavy that it makes the deepest dent of all, which means it can have lots of moons spinning around it without losing any.</p>
+
+  <p>Saturn is like a big exercise ball. It's pretty heavy, too, and makes a large dip, but not quite as big as Jupiter's. Uranus and Neptune are like basketballs. They're a bit smaller and lighter than Saturn, so their dents are not as big, but still quite deep. They're super cold, though, so imagine them as basketballs filled with ice!</p>
+
+  <p>When you toss smaller balls (like moons) onto the mat, they roll around the big planets because of the dents they make, just like if you rolled marbles around a bowl. And all the balls stay put on this cosmic mat because the edges are turned up, so nothing rolls off into the dark space beyond.</p>
+</div>
+</div>
     }
             

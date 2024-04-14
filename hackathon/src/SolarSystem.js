@@ -157,7 +157,7 @@ const SolarSystem = () => {
       uuids["Saturn"] = saturnMesh.uuid;
       uuids["Uranus"] = uranusMesh.uuid;
       uuids["Neptune"] = neptuneMesh.uuid;
-      uuids["Sun"] = sunMesh.uuid;
+      // uuids["Sun"] = sunMesh.uuid;
 
       // NOTE: Animate solar system at 60fps.
       const EARTH_YEAR = 2 * Math.PI * (1 / 60) * (1 / 60);

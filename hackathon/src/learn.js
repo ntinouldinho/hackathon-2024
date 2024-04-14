@@ -21,7 +21,7 @@ export const Learn = ({ planet }) => {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">{`Interesting Facts about ${planet}`}</h5>
+            <h1 className="modal-title">{`Interesting Facts about ${planet}`}</h1>
           </div>
           <div className="modal-body">
             {/* Render a paragraph for each description in the descriptions array */}
