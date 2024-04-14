@@ -17,6 +17,9 @@ const SolarSystemPage2 = () => {
   let { name } = useParams(); 
   const [planetName, setPlanetName] = useState(name)
   let planet;
+  const handleCloseTooltip = () => {
+    setTooltip(prev => ({ ...prev, visible: false }));
+  };
 
   useEffect(() => {
     planet = planetsConfig[name]
@@ -265,6 +268,7 @@ const SolarSystemPage2 = () => {
        <div style={{
         width: '30%',
     height: '80%',
+    paddingTop: '4em',
     position: 'absolute',
     left: '30px',
     top: '30px',
@@ -280,6 +284,17 @@ const SolarSystemPage2 = () => {
     overflow: 'hidden' /* Ensures content fits well within the borders */
     }}>
           {tooltip.content}
+          <button onClick={handleCloseTooltip} style={{
+            position: 'absolute',
+            top: '5px',
+            right: '5px',
+            border: 'none',
+            background: 'transparent',
+            color: '#FFFFFF',
+            fontSize: '20px',
+            cursor: 'pointer',
+            textShadow: '0 0 8px red'
+          }}>X</button>
         </div>
       )}
         
