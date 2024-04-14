@@ -154,7 +154,7 @@ const SolarSystemPage2 = () => {
 
     const gridSize = 200;
     const gridStep = 2;
-    const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff });
+    const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0088bb });
     const verticalPos = 0;
 
       // Gravitational field calculation incorporating body size
@@ -291,7 +291,7 @@ const SolarSystemPage2 = () => {
       }}>Start Quiz</button>
        <button onClick={() => setChatOpen(true)} style={{
         position: 'absolute',
-        left: '550px',
+        right: '0',
         margin: '10px',
         padding: '10px 20px',
         background: 'linear-gradient(145deg,  #1f77fe,  #0808af )',
@@ -309,7 +309,7 @@ const SolarSystemPage2 = () => {
       }}
       onMouseOut={e => {
         e.target.style.transform = 'scale(1)';
-      }}>Start Chat</button>
+      }}>Ask AI  🤖</button>
       {learnModalOpen && <Modal isOpen={learnModalOpen} onClose={() => setLearnModalOpen(false)} children={<Learn planet={planetName} />} />}
       {quizModalOpen && <Modal isOpen={quizModalOpen} onClose={() => setQuizModalOpen(false)} children={<Quiz planet={planetName} />} />}
       {chatOpen && <Modal isOpen={chatOpen} onClose={() => setChatOpen(false)} children={<Chat planet={planetName} />} />}
