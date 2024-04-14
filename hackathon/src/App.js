@@ -48,21 +48,42 @@ const App = () => {
 
   return (
     <>
-      <div>
-        {/* <h1>Planetary Viewer</h1> */}
-        {planets.map((planet) => (
-          <button
+      <div style={{
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    height: '100vh',
+    background: 'linear-gradient(to bottom, #0f2027, #203a43, #2c5364)', /* Deep space inspired gradient */
+    color: '#FFFFFF',
+    fontFamily: 'Orbitron, sans-serif',
+    textAlign: 'center'
+}}>
+    {/* The commented out header can be styled and used if uncommented */}
+    {/* <h1 style={{ color: '#00BFFF', textShadow: '0 0 10px #00BFFF' }}>Planetary Viewer</h1> */}
+    {planets.map((planet) => (
+        <button
             key={planet}
             onClick={() => {
-              setCurrentPlanet(planetsConfig[planet]);
+                setCurrentPlanet(planetsConfig[planet]);
             }}
-          >
+            style={{
+              margin: '15px 10px',
+              padding: '5px 10px',
+                border: 'none',
+                borderRadius: '5px',
+                background: 'rgba(0, 191, 255, 0.6)',
+                boxShadow: '0 0 10px #00BFFF',
+                color: 'white',
+                textShadow: '0 0 5px cyan',
+                cursor: 'pointer',
+            }}
+        >
             {planet}
-          </button>
-        ))}
-        {/* <SolarSystem /> */}
-        <SolarSystemPage2 planet={currentPlanet} />
-      </div>
+        </button>
+    ))}
+    {/* SolarSystemPage2 is left unstyled as requested */}
+    <SolarSystemPage2 planet={currentPlanet} />
+</div>
+
     </>
   );
 };

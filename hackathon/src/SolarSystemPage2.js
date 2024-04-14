@@ -1,12 +1,14 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 import { FontLoader } from "three/addons/loaders/FontLoader.js";
 import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 const SolarSystemPage2 = ({ planet }) => {
-  console.log(planet);
   const mountRef = useRef(null);
+  const mouse = new THREE.Vector2();
+  const raycaster = new THREE.Raycaster();
+  const [tooltip, setTooltip] = useState({ visible: false, content: "" });
 
   useEffect(() => {
     // Scene Setup
@@ -41,10 +43,38 @@ const SolarSystemPage2 = ({ planet }) => {
       0x0000ff
     );
 
+    const onClick = (event) => {
+      // Calculate mouse position in normalized device coordinates (-1 to +1) for both components.
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  
+      // Update the picking ray with the camera and mouse position.
+      raycaster.setFromCamera(mouse, camera);
+  
+      // Calculate objects intersecting the picking ray. Assume 'planetSphere' is the mesh you want to check.
+      const intersects = raycaster.intersectObjects([planetSphere]);
+  
+      if (intersects.length > 0) {
+        setTooltip({
+          visible: true,
+          content: `Planet: ${planet.name} - Clicked!
+          
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?`
+        });
+      } else {
+        setTooltip({
+          visible: false,
+          content: ""
+        });
+      }
+    };
+  
+    window.addEventListener('click', onClick);
+
     // Add axes to the scene
-    scene.add(xAxis);
-    scene.add(yAxis);
-    scene.add(zAxis);
+    // scene.add(xAxis);
+    // scene.add(yAxis);
+    // scene.add(zAxis);
 
     // Lighting
     const ambientLight = new THREE.AmbientLight(0xffffff);
@@ -117,7 +147,7 @@ const SolarSystemPage2 = ({ planet }) => {
     const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffcc });
     const stars = [];
 
-    for (let i = 0; i < 3000; i++) {
+    for (let i = 0; i < 1000; i++) {
       const star = new THREE.Mesh(starGeometry, starMaterial);
       const [x, y, z] = Array(3)
         .fill()
@@ -130,7 +160,7 @@ const SolarSystemPage2 = ({ planet }) => {
     const gridSize = 200;
     const gridStep = 2;
     const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff });
-    const verticalPos = -3;
+    const verticalPos = 0;
 
       // Gravitational field calculation incorporating body size
     function calculateGravitationalCurve(x, z, bodies) {
@@ -140,7 +170,7 @@ const SolarSystemPage2 = ({ planet }) => {
           const distance = Math.sqrt(dx * dx + dz * dz);
           // const sigma = 10;
           const G = 20;
-          const gravityEffect = -G * (body.radius / (distance/4));
+          const gravityEffect = -G * (body.radius / (distance/2));
           // const gravityEffect = -10 * (body.radius / distance)*distance;
           return acc + gravityEffect;
         }, 0);
@@ -216,10 +246,36 @@ const SolarSystemPage2 = ({ planet }) => {
     // Cleanup
     return () => {
       mountRef.current.removeChild(renderer.domElement);
+      window.removeEventListener('click', onClick);
     };
   }, [planet]);
 
-  return <div ref={mountRef} style={{ width: "100%", height: "100vh" }} />;
+  return (
+    <div ref={mountRef} style={{ width: "100%", height: "100vh" }}>
+      {tooltip.visible && (
+       <div style={{
+        width: '30%',
+    height: '80%',
+    position: 'absolute',
+    left: '30px',
+    top: '30px',
+    background: 'linear-gradient(to right, #232526, #414345)', /* Subtle dark gradient for a high-tech feel */
+    color: 'rgba(255, 255, 255, 0.9)', /* Light text color for contrast */
+    padding: '10px',
+    margin: '10px',
+    border: '1px solid rgba(255, 255, 255, 0.2)', /* Sleek, subtle border */
+    borderRadius: '8px',
+    boxShadow: '0 4px 8px rgba(0, 255, 255, 0.3)', /* Futuristic cyan glow for depth */
+    fontFamily: 'Orbitron, sans-serif', /* Futuristic font */
+    textShadow: '0 0 8px cyan', /* Cyan text glow for a digital look */
+    overflow: 'hidden' /* Ensures content fits well within the borders */
+    }}>
+          {tooltip.content}
+        </div>
+      )}
+    </div>
+  );
+  
 };
 
 // Generate a random number between -4 and -2 or between 2 and 4
