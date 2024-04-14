@@ -180,7 +180,7 @@
     },
     "Pluto": {
         "radius": 1151,
-        "texture": "venus.jpeg",
+        "texture": "pluto.jpg",
         "ring": "",
         "moons": []
     }
