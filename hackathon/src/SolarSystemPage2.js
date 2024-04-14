@@ -6,14 +6,13 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import planetsConfig from "./planets.json";
 import { useParams } from 'react-router-dom';
 
-const SolarSystemPage2 = () => {
+const SolarSystemPage2 = ({ planet }) => {
   const mountRef = useRef(null);
-  let { name } = useParams(); // The `name` variable will now hold the dynamic part of the URL
-  let planet;
+  // let { name } = useParams(); 
+  // let planet;
 
   useEffect(() => {
-    // Scene Setup
-    planet = planetsConfig[name]
+    // planet = planetsConfig[name]
     
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
