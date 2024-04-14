@@ -150,5 +150,1070 @@
              "incorrect":"Not quite! The continuous movement of water on Earth, involving evaporation, condensation, and precipitation, is known as the water cycle."
           }
        }
-    ]
+    ],
+    "Jupiter":[
+   {
+      "question":"How many moons does Jupiter have?",
+      "answers":[
+         {
+            "text":"4",
+            "correct":false
+         },
+         {
+            "text":"Over 20",
+            "correct":false
+         },
+         {
+            "text":"79",
+            "correct":true
+         },
+         {
+            "text":"100",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"That's right! Jupiter has 79 known moons, including four large ones called the Galilean moons.",
+      "incorrectFeedback":"Not quite! Jupiter has 79 known moons, not just 4, not over 20, and not quite 100."
+   },
+   {
+      "question":"What is Jupiter’s Great Red Spot?",
+      "answers":[
+         {
+            "text":"A large ocean",
+            "correct":false
+         },
+         {
+            "text":"A big mountain",
+            "correct":false
+         },
+         {
+            "text":"A giant storm",
+            "correct":true
+         },
+         {
+            "text":"A deep crater",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Absolutely correct! The Great Red Spot is a huge storm on Jupiter that's been raging for at least 350 years.",
+      "incorrectFeedback":"Almost there, but not quite! The Great Red Spot isn't an ocean, mountain, or crater."
+   },
+   {
+      "question":"How long is a day on Jupiter?",
+      "answers":[
+         {
+            "text":"24 hours",
+            "correct":false
+         },
+         {
+            "text":"10 hours",
+            "correct":true
+         },
+         {
+            "text":"48 hours",
+            "correct":false
+         },
+         {
+            "text":"12 hours",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Correct! Jupiter spins so fast that a day there is only about 10 hours long!",
+      "incorrectFeedback":"Close, but not quite. A day on Jupiter is super short, only about 10 hours long because it spins so quickly!"
+   },
+   {
+      "question":"What natural phenomenon on Jupiter is similar to Earth\\'s northern lights?",
+      "answers":[
+         {
+            "text":"Rainbows",
+            "correct":false
+         },
+         {
+            "text":"Cloud formations",
+            "correct":false
+         },
+         {
+            "text":"Auroras",
+            "correct":true
+         },
+         {
+            "text":"Snow",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"That's right! Just like Earth, Jupiter has auroras. They occur when particles from space interact with its magnetic field, creating beautiful light shows.",
+      "incorrectFeedback":"Almost! The correct answer is auroras, similar to Earth's northern lights, not rainbows or snow."
+   },
+   {
+      "question":"How does Jupiter protect Earth from comets and asteroids?",
+      "answers":[
+         {
+            "text":"By reflecting sunlight",
+            "correct":false
+         },
+         {
+            "text":"By using its strong gravity to pull them away",
+            "correct":true
+         },
+         {
+            "text":"By blowing them away with wind",
+            "correct":false
+         },
+         {
+            "text":"By hiding Earth from them",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Exactly! Jupiter acts like a big guardian. Its strong gravity pulls in comets and asteroids, steering many away from Earth and keeping us safer.",
+      "incorrectFeedback":"Not exactly! Jupiter protects Earth by using its strong gravity to pull comets and asteroids away from us, not by blowing them away or hiding Earth."
+   }
+],
+"Mars":[
+   {
+      "question":"Why is Mars called the 'Red Planet'?",
+      "answers":[
+         {
+            "text":"Because it's hot like fire",
+            "correct":false
+         },
+         {
+            "text":"Because its surface is covered in red rust",
+            "correct":true
+         },
+         {
+            "text":"Because it's angry",
+            "correct":false
+         },
+         {
+            "text":"Because it's the color of a rose",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Exactly right! Mars is called the 'Red Planet' because its surface has lots of iron oxide, or rust, which makes it look red.",
+      "incorrectFeedback":"Nice try! The correct answer is B, because Mars has lots of iron oxide, or rust, that makes its surface red."
+   },
+   {
+      "question":"How long is a day on Mars?",
+      "answers":[
+         {
+            "text":"Just like Earth, 24 hours",
+            "correct":false
+         },
+         {
+            "text":"12 hours",
+            "correct":false
+         },
+         {
+            "text":"24 hours and 39 minutes",
+            "correct":true
+         },
+         {
+            "text":"30 hours",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Correct! A day on Mars is just a little longer than a day on Earth, lasting 24 hours and 39 minutes.",
+      "incorrectFeedback":"Almost! A day on Mars is actually 24 hours and 39 minutes long, a bit longer than a day on Earth."
+   },
+   {
+      "question":"What is the name of the tallest volcano on Mars?",
+      "answers":[
+         {
+            "text":"Mauna Loa",
+            "correct":false
+         },
+         {
+            "text":"Mount Everest",
+            "correct":false
+         },
+         {
+            "text":"Olympus Mons",
+            "correct":true
+         },
+         {
+            "text":"Mount Fuji",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"That’s right! Olympus Mons is the tallest volcano on Mars, and it's about three times the height of Mount Everest.",
+      "incorrectFeedback":"Not quite! The tallest volcano on Mars is Olympus Mons, not any of the Earth mountains."
+   },
+   {
+      "question":"What are the names of Mars' two moons?",
+      "answers":[
+         {
+            "text":"Phobos and Deimos",
+            "correct":true
+         },
+         {
+            "text":"Castor and Pollux",
+            "correct":false
+         },
+         {
+            "text":"Titan and Rhea",
+            "correct":false
+         },
+         {
+            "text":"Luna and Selene",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Excellent! Mars has two small moons named Phobos and Deimos.",
+      "incorrectFeedback":"Good guess, but Mars' moons are actually called Phobos and Deimos."
+   },
+   {
+      "question":"What kind of robots currently explore Mars?",
+      "answers":[
+         {
+            "text":"Transformers",
+            "correct":false
+         },
+         {
+            "text":"Drones",
+            "correct":false
+         },
+         {
+            "text":"Rovers",
+            "correct":true
+         },
+         {
+            "text":"Androids",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"That’s correct! Rovers are the robots exploring Mars, helping us learn more about the planet.",
+      "incorrectFeedback":"Not quite! The robots currently exploring Mars are called rovers, not drones, transformers, or androids."
+   }
+],
+"Mercury":[
+   {
+      "question":"What is the duration of a day on Mercury?",
+      "answers":[
+         {
+            "text":"88 days",
+            "correct":false
+         },
+         {
+            "text":"24 hours",
+            "correct":false
+         },
+         {
+            "text":"59 Earth days",
+            "correct":true
+         },
+         {
+            "text":"30 days",
+            "correct":false
+         }
+      ],
+      "feedback":{
+         "correct":"Correct! A day on Mercury lasts 59 Earth days due to its slow rotation.",
+         "incorrect":"Not quite! A day on Mercury actually lasts 59 Earth days because of its slow rotation, not 88 days, 24 hours, or 30 days."
+      }
+   },
+   {
+      "question":"What is Mercury's surface primarily characterized by?",
+      "answers":[
+         {
+            "text":"Smooth plains",
+            "correct":false
+         },
+         {
+            "text":"Oceans",
+            "correct":false
+         },
+         {
+            "text":"Thick forests",
+            "correct":false
+         },
+         {
+            "text":"Craters",
+            "correct":true
+         }
+      ],
+      "feedback":{
+         "correct":"Exactly! Mercury's surface is covered in craters due to many impacts over time.",
+         "incorrect":"Close, but not quite! Mercury's surface is primarily characterized by craters, not smooth plains, oceans, or forests."
+      }
+   },
+   {
+      "question":"Which planet is the closest to the Sun?",
+      "answers":[
+         {
+            "text":"Venus",
+            "correct":false
+         },
+         {
+            "text":"Mars",
+            "correct":false
+         },
+         {
+            "text":"Mercury",
+            "correct":true
+         },
+         {
+            "text":"Earth",
+            "correct":false
+         }
+      ],
+      "feedback":{
+         "correct":"Correct! Mercury is the closest planet to the Sun.",
+         "incorrect":"Not correct. The closest planet to the Sun is Mercury, not Venus, Mars, or Earth."
+      }
+   },
+   {
+      "question":"How long does it take Mercury to complete one orbit around the Sun?",
+      "answers":[
+         {
+            "text":"365 days",
+            "correct":false
+         },
+         {
+            "text":"88 days",
+            "correct":true
+         },
+         {
+            "text":"225 days",
+            "correct":false
+         },
+         {
+            "text":"1 day",
+            "correct":false
+         }
+      ],
+      "feedback":{
+         "correct":"Right on! Mercury completes an orbit around the Sun in just 88 Earth days.",
+         "incorrect":"Almost! Mercury actually completes its orbit around the Sun in just 88 days, not 365 days, 225 days, or in 1 day."
+      }
+   },
+   {
+      "question":"What significant feature does Mercury have, similar to Earth?",
+      "answers":[
+         {
+            "text":"Large oceans",
+            "correct":false
+         },
+         {
+            "text":"Dense atmosphere",
+            "correct":false
+         },
+         {
+            "text":"Magnetic field",
+            "correct":true
+         },
+         {
+            "text":"Ring system",
+            "correct":false
+         }
+      ],
+      "feedback":{
+         "correct":"Correct! Despite its small size, Mercury has a magnetic field, much like Earth.",
+         "incorrect":"Incorrect. Mercury's significant Earth-like feature is its magnetic field, not large oceans, a dense atmosphere, or a ring system."
+      }
+   },
+   {
+      "question":"Why can't you breathe on Mercury?",
+      "answers":[
+         {
+            "text":"It has a very thin atmosphere.",
+            "correct":true
+         },
+         {
+            "text":"It’s too hot.",
+            "correct":false
+         },
+         {
+            "text":"There’s too much oxygen.",
+            "correct":false
+         },
+         {
+            "text":"It’s fully underwater.",
+            "correct":false
+         }
+      ],
+      "feedback":{
+         "correct":"Exactly! Mercury has a very thin atmosphere, making it impossible to breathe there.",
+         "incorrect":"Not quite right. You can't breathe on Mercury because it has a very thin atmosphere, not because it's too hot or underwater."
+      }
+   },
+   {
+      "question":"How does the Sun appear when viewed from Mercury compared to Earth?",
+      "answers":[
+         {
+            "text":"About the same size",
+            "correct":false
+         },
+         {
+            "text":"Smaller",
+            "correct":false
+         },
+         {
+            "text":"Three times larger",
+            "correct":true
+         },
+         {
+            "text":"Invisible",
+            "correct":false
+         }
+      ],
+      "feedback":{
+         "correct":"Correct! From Mercury, the Sun appears three times larger than it does from Earth due to Mercury's proximity to the Sun.",
+         "incorrect":"Incorrect. From Mercury, the Sun appears three times larger than from Earth, not the same size, smaller, or invisible."
+      }
+   },
+   {
+      "question":"What does the sky look like on Mercury during the day?",
+      "answers":[
+         {
+            "text":"Blue and clear",
+            "correct":false
+         },
+         {
+            "text":"Green and cloudy",
+            "correct":false
+         },
+         {
+            "text":"Red and dusty",
+            "correct":false
+         },
+         {
+            "text":"Black",
+            "correct":true
+         }
+      ],
+      "feedback":{
+         "correct":"That’s right! The sky on Mercury appears black during the day because the planet has virtually no atmosphere to scatter sunlight.",
+         "incorrect":"Not quite! The sky on Mercury is black during the day because there is no significant atmosphere to scatter the sunlight, not blue, green, or red."
+      }
+   }
+],
+"Neptune":[
+   {
+      "question":"What causes Neptune’s blue color?",
+      "answers":[
+         {
+            "text":"Large oceans of water",
+            "correct":false
+         },
+         {
+            "text":"Methane in the atmosphere",
+            "correct":true
+         },
+         {
+            "text":"Reflection from Earth",
+            "correct":false
+         },
+         {
+            "text":"Blue sand",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Exactly right! Neptune’s beautiful blue color is caused by methane gas in its atmosphere that absorbs red light and reflects blue light.",
+      "incorrectFeedback":"Nice try! Neptune looks blue because of the methane gas in its atmosphere."
+   },
+   {
+      "question":"How fast are the winds on Neptune?",
+      "answers":[
+         {
+            "text":"500 miles per hour",
+            "correct":false
+         },
+         {
+            "text":"800 miles per hour",
+            "correct":false
+         },
+         {
+            "text":"1,200 miles per hour",
+            "correct":true
+         },
+         {
+            "text":"100 miles per hour",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"That’s right! Neptune has super fast winds that can reach speeds of over 1,200 miles per hour.",
+      "incorrectFeedback":"Not quite! The winds on Neptune can reach speeds of up to 1,200 miles per hour."
+   },
+   {
+      "question":"What type of giant is Neptune classified as?",
+      "answers":[
+         {
+            "text":"Gas giant",
+            "correct":false
+         },
+         {
+            "text":"Rock giant",
+            "correct":false
+         },
+         {
+            "text":"Ice giant",
+            "correct":true
+         },
+         {
+            "text":"Storm giant",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Correct! Neptune is classified as an ice giant because of its composition, which includes water, ammonia, and methane ice.",
+      "incorrectFeedback":"Good guess, but Neptune is an ice giant because of the icy materials in its makeup."
+   },
+   {
+      "question":"Which moon orbits Neptune in the opposite direction of most other moons?",
+      "answers":[
+         {
+            "text":"Europa",
+            "correct":false
+         },
+         {
+            "text":"Titan",
+            "correct":false
+         },
+         {
+            "text":"Ganymede",
+            "correct":false
+         },
+         {
+            "text":"Triton",
+            "correct":true
+         }
+      ],
+      "correctFeedback":"Excellent! Triton is unique because it orbits Neptune in the opposite direction of most other moons.",
+      "incorrectFeedback":"Almost there! Triton is known for its retrograde orbit around Neptune."
+   },
+   {
+      "question":"How long does it take for Neptune to orbit the Sun once?",
+      "answers":[
+         {
+            "text":"75 Earth years",
+            "correct":false
+         },
+         {
+            "text":"165 Earth years",
+            "correct":true
+         },
+         {
+            "text":"200 Earth years",
+            "correct":false
+         },
+         {
+            "text":"100 Earth years",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"That’s right! Neptune takes about 165 Earth years to complete one orbit around the Sun.",
+      "incorrectFeedback":"Not quite! Neptune orbits the Sun once every 165 Earth years."
+   },
+   {
+      "question":"What feature is similar to Jupiter’s Great Red Spot?",
+      "answers":[
+         {
+            "text":"Great Blue Hole",
+            "correct":false
+         },
+         {
+            "text":"Great Dark Spot",
+            "correct":true
+         },
+         {
+            "text":"Great White Storm",
+            "correct":false
+         },
+         {
+            "text":"Great Thunder Storm",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Correct! Neptune has a similar feature called the Great Dark Spot, which is a giant storm.",
+      "incorrectFeedback":"Close, but the correct answer is the Great Dark Spot, a massive storm on Neptune."
+   },
+   {
+      "question":"What is remarkable about Neptune’s temperature?",
+      "answers":[
+         {
+            "text":"It's the hottest planet",
+            "correct":false
+         },
+         {
+            "text":"It's the coldest planet",
+            "correct":true
+         },
+         {
+            "text":"It has moderate temperatures",
+            "correct":false
+         },
+         {
+            "text":"It has fluctuating temperatures",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Exactly! Neptune is one of the coldest planets in our solar system, with temperatures dropping extremely low.",
+      "incorrectFeedback":"Good try, but Neptune is known for being very cold."
+   }
+],
+"Saturn":[
+   {
+      "question":"What are Saturn's rings made of?",
+      "answers":[
+         {
+            "text":"Clouds",
+            "correct":false
+         },
+         {
+            "text":"Ice and rocks",
+            "correct":true
+         },
+         {
+            "text":"Liquid water",
+            "correct":false
+         },
+         {
+            "text":"Pure gold",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Exactly right! Saturn's rings are made of millions of ice particles and rocks that orbit around the planet.",
+      "incorrectFeedback":"Nice try! The rings are actually made of ice and rocks, not clouds, liquid water, or gold."
+   },
+   {
+      "question":"How long does one day last on Saturn?",
+      "answers":[
+         {
+            "text":"About 24 hours",
+            "correct":false
+         },
+         {
+            "text":"About 12 hours",
+            "correct":false
+         },
+         {
+            "text":"About 10 and a half hours",
+            "correct":true
+         },
+         {
+            "text":"About 30 hours",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Correct! A day on Saturn only lasts about 10 and a half hours because it spins so quickly.",
+      "incorrectFeedback":"Almost! A day on Saturn is much shorter, only about 10 and a half hours long."
+   },
+   {
+      "question":"Which of Saturn's moons is the largest?",
+      "answers":[
+         {
+            "text":"Enceladus",
+            "correct":false
+         },
+         {
+            "text":"Mimas",
+            "correct":false
+         },
+         {
+            "text":"Titan",
+            "correct":true
+         },
+         {
+            "text":"Iapetus",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"That’s right! Titan is not only Saturn’s largest moon but also has its own atmosphere, which is very unusual for a moon.",
+      "incorrectFeedback":"Not quite! The largest moon of Saturn is Titan, which is even bigger than the planet Mercury."
+   },
+   {
+      "question":"What unusual shape is the storm on Saturn’s north pole?",
+      "answers":[
+         {
+            "text":"Circle",
+            "correct":false
+         },
+         {
+            "text":"Triangle",
+            "correct":false
+         },
+         {
+            "text":"Hexagon",
+            "correct":true
+         },
+         {
+            "text":"Square",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Exactly! The storm at Saturn’s north pole is a hexagon, which is a six-sided shape.",
+      "incorrectFeedback":"Good guess, but the storm is actually shaped like a hexagon, a six-sided figure."
+   },
+   {
+      "question":"How fast can winds on Saturn get?",
+      "answers":[
+         {
+            "text":"Up to 500 miles per hour",
+            "correct":false
+         },
+         {
+            "text":"Up to 1,100 miles per hour",
+            "correct":true
+         },
+         {
+            "text":"Up to 300 miles per hour",
+            "correct":false
+         },
+         {
+            "text":"Up to 100 miles per hour",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Correct! Winds on Saturn can be super fast, reaching speeds of up to 1,100 miles per hour.",
+      "incorrectFeedback":"Not quite! Winds on Saturn are among the fastest in the solar system, reaching speeds of up to 1,100 miles per hour."
+   },
+   {
+      "question":"How long is one season on Saturn?",
+      "answers":[
+         {
+            "text":"About 7 years",
+            "correct":true
+         },
+         {
+            "text":"About 1 year",
+            "correct":false
+         },
+         {
+            "text":"About 3 years",
+            "correct":false
+         },
+         {
+            "text":"About 5 years",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"That’s right! Each season on Saturn lasts about seven Earth years because it takes Saturn almost 30 years to orbit the Sun.",
+      "incorrectFeedback":"Close, but actually, each season on Saturn lasts about seven years due to its long orbital period around the Sun."
+   },
+   {
+      "question":"What did the Cassini spacecraft do?",
+      "answers":[
+         {
+            "text":"Landed on Saturn",
+            "correct":false
+         },
+         {
+            "text":"Explored Saturn's moons",
+            "correct":true
+         },
+         {
+            "text":"Took the first pictures of Mars",
+            "correct":false
+         },
+         {
+            "text":"Flew into the Sun",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Excellent! The Cassini spacecraft spent years exploring Saturn and its moons, giving us incredible data and pictures.",
+      "incorrectFeedback":"Not quite! The Cassini spacecraft was famous for exploring Saturn and its moons, not landing on Saturn or taking pictures of Mars."
+   }
+],
+"Uranus":[
+   {
+      "question":"Why does Uranus spin on its side?",
+      "answers":[
+         {
+            "text":"It was born that way",
+            "correct":false
+         },
+         {
+            "text":"It collided with another planet",
+            "correct":true
+         },
+         {
+            "text":"It's trying to be different",
+            "correct":false
+         },
+         {
+            "text":"It was shaped like a ball",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Exactly right! Scientists believe Uranus spins on its side because it might have collided with another planet long ago.",
+      "incorrectFeedback":"Nice try! The most accepted theory is that Uranus spins on its side due to a collision with another planet in the past."
+   },
+   {
+      "question":"What is the temperature like on Uranus?",
+      "answers":[
+         {
+            "text":"Hot like the sun",
+            "correct":false
+         },
+         {
+            "text":"Warm like a spring day",
+            "correct":false
+         },
+         {
+            "text":"Cold like a freezer",
+            "correct":true
+         },
+         {
+            "text":"Cool like a fall evening",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Correct! Uranus is extremely cold, with temperatures dropping below -350 degrees Fahrenheit.",
+      "incorrectFeedback":"Not quite! Uranus is actually one of the coldest planets in our solar system, much colder than a freezer!"
+   },
+   {
+      "question":"What color is Uranus?",
+      "answers":[
+         {
+            "text":"Red",
+            "correct":false
+         },
+         {
+            "text":"Blue",
+            "correct":true
+         },
+         {
+            "text":"Yellow",
+            "correct":false
+         },
+         {
+            "text":"Green",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"That’s right! Uranus appears blue because of the methane in its atmosphere that absorbs red light and scatters blue light.",
+      "incorrectFeedback":"Good guess, but Uranus is actually blue due to the methane gas in its atmosphere."
+   },
+   {
+      "question":"How many moons does Uranus have?",
+      "answers":[
+         {
+            "text":"5",
+            "correct":false
+         },
+         {
+            "text":"27",
+            "correct":true
+         },
+         {
+            "text":"10",
+            "correct":false
+         },
+         {
+            "text":"50",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Excellent! Uranus has 27 known moons that we’ve discovered so far.",
+      "incorrectFeedback":"Close, but Uranus actually has 27 known moons."
+   },
+   {
+      "question":"What type of giant is Uranus considered?",
+      "answers":[
+         {
+            "text":"Rock giant",
+            "correct":false
+         },
+         {
+            "text":"Gas giant",
+            "correct":false
+         },
+         {
+            "text":"Ice giant",
+            "correct":true
+         },
+         {
+            "text":"Fire giant",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Correct! Uranus is classified as an ice giant because it has more 'ices' like water, ammonia, and methane.",
+      "incorrectFeedback":"Almost! Uranus is actually classified as an ice giant because of its composition, which includes icy materials like water, ammonia, and methane."
+   },
+   {
+      "question":"What makes Uranus's rings different from Saturn's?",
+      "answers":[
+         {
+            "text":"They are colorful",
+            "correct":false
+         },
+         {
+            "text":"They are completely invisible",
+            "correct":false
+         },
+         {
+            "text":"They are brighter and thicker",
+            "correct":false
+         },
+         {
+            "text":"They are darker and thinner",
+            "correct":true
+         }
+      ],
+      "correctFeedback":"That’s right! Uranus’s rings are much darker and thinner compared to Saturn's bright and thick rings.",
+      "incorrectFeedback":"Not quite! Uranus’s rings are actually darker and thinner than Saturn’s, which are bright and thick."
+   },
+   {
+      "question":"What unique seasonal change does Uranus experience?",
+      "answers":[
+         {
+            "text":"It has no seasons",
+            "correct":false
+         },
+         {
+            "text":"Each season lasts about 42 years",
+            "correct":true
+         },
+         {
+            "text":"It has only one season",
+            "correct":false
+         },
+         {
+            "text":"Seasons change every month",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Exactly! Because of its tilted axis, each season on Uranus lasts about 42 years.",
+      "incorrectFeedback":"Good try! Due to its extreme tilt, each season on Uranus actually lasts about 42 years."
+   }
+],
+"Venus":[
+   {
+      "question":"Why is Venus so hot?",
+      "answers":[
+         {
+            "text":"It\\'s closest to the Sun",
+            "correct":false
+         },
+         {
+            "text":"It has lots of volcanoes",
+            "correct":false
+         },
+         {
+            "text":"Its thick atmosphere traps heat",
+            "correct":true
+         },
+         {
+            "text":"It\\'s covered in lava",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"That's right! Venus is so hot because its thick atmosphere traps the Sun's heat, much like a greenhouse.",
+      "incorrectFeedback":"Good try, but Venus is actually hot because its thick atmosphere acts like a greenhouse, trapping all the heat!"
+   },
+   {
+      "question":"What is special about how Venus spins?",
+      "answers":[
+         {
+            "text":"It spins very fast",
+            "correct":false
+         },
+         {
+            "text":"It spins backwards",
+            "correct":true
+         },
+         {
+            "text":"It doesn’t spin at all",
+            "correct":false
+         },
+         {
+            "text":"It spins sideways",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Exactly! Venus spins the opposite way of most planets, which means the Sun rises in the west and sets in the east on Venus.",
+      "incorrectFeedback":"Not quite! Venus actually spins backwards compared to most planets, so the Sun appears to rise in the west!"
+   },
+   {
+      "question":"How long is a day on Venus compared to a year?",
+      "answers":[
+         {
+            "text":"A day is shorter than a year",
+            "correct":false
+         },
+         {
+            "text":"A day and a year are the same length",
+            "correct":false
+         },
+         {
+            "text":"A day is longer than a year",
+            "correct":true
+         },
+         {
+            "text":"Venus doesn’t have days and years",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Correct! One day on Venus is longer than one year. It takes longer for Venus to complete one spin on its axis than it does for it to orbit the Sun.",
+      "incorrectFeedback":"Almost! Interestingly, a day on Venus (one complete spin) actually lasts longer than a Venusian year (one orbit around the Sun)."
+   },
+   {
+      "question":"What makes the clouds on Venus unique?",
+      "answers":[
+         {
+            "text":"They are made of water vapor",
+            "correct":false
+         },
+         {
+            "text":"They are colorful",
+            "correct":false
+         },
+         {
+            "text":"They rain diamonds",
+            "correct":false
+         },
+         {
+            "text":"They contain sulfuric acid",
+            "correct":true
+         }
+      ],
+      "correctFeedback":"That's right! The clouds on Venus are made of sulfuric acid, which is very corrosive and dangerous.",
+      "incorrectFeedback":"Not exactly! The clouds on Venus are actually made of sulfuric acid, not water vapor or diamonds, and they aren't colorful either."
+   },
+   {
+      "question":"How does the temperature on Venus compare to other planets in our solar system?",
+      "answers":[
+         {
+            "text":"It\\'s the coldest because it\\'s far from the Sun.",
+            "correct":false
+         },
+         {
+            "text":"It\\'s the hottest because of its thick atmosphere.",
+            "correct":true
+         },
+         {
+            "text":"It\\'s moderate like Earth.",
+            "correct":false
+         },
+         {
+            "text":"It varies widely like on Mars.",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"That's right! Venus is the hottest planet in our solar system, not because it's closest to the Sun, but because its thick atmosphere traps heat very effectively.",
+      "incorrectFeedback":"Not quite! Although Venus isn't the closest planet to the Sun, it is the hottest due to its thick atmosphere that traps heat very well."
+   },
+   {
+      "question":"What would happen if you tried to stand on the surface of Venus?",
+      "answers":[
+         {
+            "text":"You would float because of low gravity.",
+            "correct":false
+         },
+         {
+            "text":"You would be crushed by the high atmospheric pressure.",
+            "correct":true
+         },
+         {
+            "text":"You would slide around because of icy conditions.",
+            "correct":false
+         },
+         {
+            "text":"You would sink into the surface like quicksand.",
+            "correct":false
+         }
+      ],
+      "correctFeedback":"Exactly! The pressure on Venus is so high that it would feel like being deep underwater, and it would crush anything not specially designed to handle it.",
+      "incorrectFeedback":"Good guess, but actually, the pressure on Venus is extremely high, more like being deep underwater than experiencing any other condition mentioned."
+   }
+]
  }
