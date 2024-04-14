@@ -3,13 +3,18 @@ import * as THREE from "three";
 import { FontLoader } from "three/addons/loaders/FontLoader.js";
 import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import planetsConfig from "./planets.json";
+import { useParams } from 'react-router-dom';
 
-const SolarSystemPage2 = ({ planet }) => {
-  console.log(planet);
+const SolarSystemPage2 = () => {
   const mountRef = useRef(null);
+  let { name } = useParams(); // The `name` variable will now hold the dynamic part of the URL
+  let planet;
 
   useEffect(() => {
     // Scene Setup
+    planet = planetsConfig[name]
+    
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -19,6 +24,7 @@ const SolarSystemPage2 = ({ planet }) => {
     );
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    
     mountRef.current.appendChild(renderer.domElement);
 
     // Create axes
@@ -215,9 +221,9 @@ const SolarSystemPage2 = ({ planet }) => {
 
     // Cleanup
     return () => {
-      mountRef.current.removeChild(renderer.domElement);
+      // mountRef.current.removeChild(renderer.domElement);
     };
-  }, [planet]);
+  }, []);
 
   return <div ref={mountRef} style={{ width: "100%", height: "100vh" }} />;
 };
