@@ -21,10 +21,36 @@ const SolarSystemPage2 = ({ planet }) => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     mountRef.current.appendChild(renderer.domElement);
 
+    // Create axes
+    const xAxis = new THREE.ArrowHelper(
+      new THREE.Vector3(1, 0, 0),
+      new THREE.Vector3(0, 0, 0),
+      10,
+      0xff0000
+    );
+    const yAxis = new THREE.ArrowHelper(
+      new THREE.Vector3(0, 1, 0),
+      new THREE.Vector3(0, 0, 0),
+      10,
+      0x00ff00
+    );
+    const zAxis = new THREE.ArrowHelper(
+      new THREE.Vector3(0, 0, 1),
+      new THREE.Vector3(0, 0, 0),
+      10,
+      0x0000ff
+    );
+
+    // Add axes to the scene
+    scene.add(xAxis);
+    scene.add(yAxis);
+    scene.add(zAxis);
+
     // Lighting
     const ambientLight = new THREE.AmbientLight(0xffffff);
     scene.add(ambientLight);
     const pointLight = new THREE.PointLight(0xffffff, 1);
+    pointLight.rotation.x = 1;
     pointLight.position.set(5, 3, 5);
     scene.add(pointLight);
 
@@ -45,6 +71,7 @@ const SolarSystemPage2 = ({ planet }) => {
     const planetSphere = getPlanet(3, planet.texture);
 
     scene.add(planetSphere);
+    planetSphere.position.set(10, 1, 1);
 
     const rings = getRings(planet.ring, 0.5);
     if (rings) {
@@ -99,6 +126,9 @@ const SolarSystemPage2 = ({ planet }) => {
     }
 
     camera.position.z = 10;
+    // camera.position.x = 10;
+    // camera.position.y = 20;
+
     // camera.lookAt(moon.position);
 
     const controls = new OrbitControls(camera, renderer.domElement);
