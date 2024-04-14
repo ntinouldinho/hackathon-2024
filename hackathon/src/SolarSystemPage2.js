@@ -127,9 +127,9 @@ const SolarSystemPage2 = () => {
 
       //scene.add(moonSphere);
       moonSphere.position.set(
-        getRandomNumber(1.5, 3),
-        getRandomNumber(1.5, 3),
-        getRandomNumber(1.5, 3)
+        getRandomNumber(3, 6),
+        getRandomNumber(3, 6),
+        getRandomNumber(3, 6)
       ); // Position the moon next to the planet
       scene.add(moonSphere); // Add moon to the scene
       moonShperes.push(moonSphere);
